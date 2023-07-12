@@ -1,0 +1,4 @@
+#sidebar a.active {
+	text-decoration: underline;
+	color: rgb(185 28 28);
+}
