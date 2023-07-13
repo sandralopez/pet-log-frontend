@@ -45,6 +45,7 @@ function Tag() {
       )
 
       return null;
+    }
   }
 
   return (
