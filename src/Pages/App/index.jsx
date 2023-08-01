@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { ProtectedRoute } from '../../Components/ProtectedRoute';
+import { AuthContextProvider } from '../../Context/AuthContext';
 import { Landing } from '../Landing';
 import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
@@ -15,21 +17,86 @@ import { About } from '../About';
 
 function App() {
 	return (
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/my-account" element={<MyAccount />} />
-        <Route path="/my-pets" element={<MyPets />} />
-        <Route path="/my-logs" element={<MyLogs />} />
-        <Route path="/my-logs/add" element={<Log />} />
-        <Route path="/my-graphs" element={<MyGraphs />} />
-        <Route path="/my-pets/add" element={<Pet />} />
-        <Route path="/my-tags" element={<MyTags />} />
-        <Route path="/my-tags/add" element={<Tag />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route 
+            path="/my-account" 
+            element={
+              <ProtectedRoute>
+                <MyAccount />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-pets" 
+            element={
+              <ProtectedRoute>
+                <MyPets />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-logs" 
+            element={
+              <ProtectedRoute>
+                <MyLogs />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-logs/add"
+            element={
+              <ProtectedRoute>
+                <Log />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-graphs" 
+            element={
+              <ProtectedRoute>
+                <MyGraphs />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-pets/add" 
+            element={
+              <ProtectedRoute>
+                <Pet />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-tags" 
+            element={
+              <ProtectedRoute>
+                <MyTags />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/my-tags/add" 
+            element={
+              <ProtectedRoute>
+                <Tag />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/home" 
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </AuthContextProvider>
 	)
 }
 
