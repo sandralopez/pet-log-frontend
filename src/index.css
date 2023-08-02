@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.alert-success {
+		@apply bg-[#DDFFBB] border-[#C7E9B0] text-[#A4BC92];
+	}
+
+	.alert-info {
+		@apply bg-[#BDCDD6] border-[#93BFCF] text-[#6096B4];
+	}
+
+	.alert-error {
+		@apply bg-[#E29C68] border-[#FA9884] text-[#E74646];
+	}
+
+	.alert-warning {
+		@apply bg-[#FAEAB1] border-[#E5BA73] text-[#C58940];
+	}
+}
