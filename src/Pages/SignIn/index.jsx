@@ -43,7 +43,7 @@ function SignIn({setToken}) {
                 Contraseña: 
             </label>
             <input 
-              type="text" 
+              type="password" 
               id="password" 
               value={password}
               placeholder="Contraseña" 

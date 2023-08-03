@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { BASE_URL } from './config';
+import axiosPublic from './AxiosConfig/axiosPublic';
 
-const baseUrl = `${BASE_URL}/auth/login`;
+const baseUrl = `/auth/login`;
 
 const loginService = async (credentials) => {
-  const { data } = await axios.post(baseUrl, credentials);
+  const { data } = await axiosPublic.post(baseUrl, credentials);
 
   return data;
 }
+
 
 export { loginService };

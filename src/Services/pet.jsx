@@ -1,14 +1,10 @@
-import axios from 'axios';
-import { BASE_URL } from './config';
+import axiosPrivate from './AxiosConfig/axiosPrivate';
 
-const baseUrl = `${BASE_URL}/users/me/pets`;
+const baseUrl = '/users/me/pets';
 
 export const getPets = async (jwt) => {
     try {
-        const { data } = await axios.get(baseUrl, {
-            headers: { Authorization: `Bearer ${jwt}` }
-        });
-
+        const { data } = await axiosPrivate.get(baseUrl);
         return { status: 'ok', data: data };
     }
     catch(error) {
@@ -18,7 +14,7 @@ export const getPets = async (jwt) => {
 
 export const getPet = async (jwt, petId) => {
     try {
-        const { data } = await axios.get(`${baseUrl}/${petId}`, {
+        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}`, {
             headers: { Authorization: `Bearer ${jwt}` }
         });
 
@@ -31,7 +27,7 @@ export const getPet = async (jwt, petId) => {
 
 export const addPet = async (jwt, newPetData) => {
     try {
-        const { data } = await axios.post(baseUrl, newPetData, {
+        const { data } = await axiosPrivate.post(baseUrl, newPetData, {
             headers: { Authorization: `Bearer ${jwt}` }
         });
 
