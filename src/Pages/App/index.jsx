@@ -5,7 +5,6 @@ import { Landing } from '../Landing';
 import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
 import { MyTags } from '../MyTags';
-import { Tag } from '../Tag';
 import { MyLogs } from '../MyLogs';
 import { Log } from '../Log';
 import { SignIn } from '../SignIn';
@@ -66,14 +65,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyTags />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/my-tags/add" 
-            element={
-              <ProtectedRoute>
-                <Tag />
               </ProtectedRoute>
             } 
           />

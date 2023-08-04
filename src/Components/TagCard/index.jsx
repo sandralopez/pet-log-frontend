@@ -1,6 +1,6 @@
-function TagCard({ tag, datatype, unitMeasure, unitTime}) {
+function TagCard({ tag, datatype, measureUnit, timeUnit, onSelect, onDelete}) {
 	return (
-		<div className="w-72 rounded shadow-lg cursor-pointer">
+		<div className="w-72 rounded shadow-lg">
 			<div className="px-6 py-4">
 				<p className="text-xl mb-2">
 					{tag}
@@ -19,7 +19,7 @@ function TagCard({ tag, datatype, unitMeasure, unitTime}) {
 	                Unidad de medida
 	            </label>
 				<p id="unitMeasure" className="text-gray-700 text-sm mb-2">
-					{unitMeasure}
+					{measureUnit}
 				</p>
 	            <label 
 	              htmlFor="unitTime" 
@@ -27,8 +27,10 @@ function TagCard({ tag, datatype, unitMeasure, unitTime}) {
 	                Unidad de tiempo
 	            </label>
 				<p id="unitTime" className="text-gray-700 text-sm mb-2">
-					{unitTime}
+					{timeUnit}
 				</p>
+				<span className="text-gray-700 cursor-pointer text-xs mr-2" onClick={onSelect}>Editar</span>
+				<span className="text-gray-700 cursor-pointer text-xs mr-2" onClick={onDelete}>Eliminar</span>
 			</div>
 		</div>
 	)
