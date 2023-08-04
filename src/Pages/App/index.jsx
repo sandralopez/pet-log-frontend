@@ -10,7 +10,6 @@ import { MyLogs } from '../MyLogs';
 import { Log } from '../Log';
 import { SignIn } from '../SignIn';
 import { MyPets } from '../MyPets';
-import { Pet } from '../Pet';
 import { SignUp } from '../SignUp';
 import { Home } from '../Home';
 import { About } from '../About';
@@ -59,14 +58,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyGraphs />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/my-pets/add" 
-            element={
-              <ProtectedRoute>
-                <Pet />
               </ProtectedRoute>
             } 
           />
