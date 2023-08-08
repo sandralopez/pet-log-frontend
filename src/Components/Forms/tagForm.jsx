@@ -144,7 +144,7 @@ function TagForm({ onSubmit, initialValues }) {
         type="button"
         onClick={handleTagSubmit}
         className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
-        Añadir
+        Guardar
       </button>
     </form>
   )
