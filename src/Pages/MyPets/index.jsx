@@ -1,38 +1,16 @@
-import { useEffect, useState } from 'react';
-import { getPets, addPet, updatePet, deletePet } from '../../Services/pet';
+import { useContext, useState } from 'react';
+import { PetContext } from '../../Context/PetContext';
+import { addPet, updatePet, deletePet } from '../../Services/pet';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Pet } from '../../Components/Pet';
 import { Alert } from '../../Components/Alert';
 import { PetForm } from '../../Components/Forms/petForm';
 
 function MyPets() {
-  const [pets, setPets] = useState(null);
+  const [pets, setPets] = useContext(PetContext);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-
-  useEffect(() =>{
-    getPetsService();
-  }, []);
-
-  async function getPetsService() {
-    try {
-      const response = await getPets();
-
-      if (response.status === "ok") {
-        setPets(response.data);
-      }
-      else {
-        throw Error('Ha ocurrido un error al obtener las mascotas');
-      }
-    }
-    catch(error) {
-      setAlert(() => ({
-        type: "error",
-        message: "Ha ocurrido un error al obtener las mascotas"
-      }));
-    }
-  }
 
   const handleReturn = () => {
     setIsEditMode(null);
@@ -58,6 +36,8 @@ function MyPets() {
           throw Error('Ha ocurrido un error al crear la nueva mascota');
         } 
         else {
+          setPets(prevPets => [...prevPets, response.data]);
+
           setAlert(() => ({
             type: "success",
             message: "Mascota creada correctamente"
@@ -66,7 +46,6 @@ function MyPets() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getPetsService();
       }
       catch(error) {
           setAlert(() => ({
@@ -84,6 +63,12 @@ function MyPets() {
           throw Error('Ha ocurrido un error al modificar la información de la mascota');
         } 
         else {
+          setPets(prevPets => {
+            return prevPets.map(pet =>
+              pet._id === _id ? { ...pet, ...response.data } : pet
+            );
+          });
+
           setAlert(() => ({
             type: "success",
             message: "Mascota modificada correctamente"
@@ -92,7 +77,6 @@ function MyPets() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getPetsService();
       }
       catch(error) {
           setAlert(() => ({
@@ -113,6 +97,8 @@ function MyPets() {
           throw Error('Ha ocurrido un error al eliminar la mascota');
         } 
         else {
+          setPets(pets.filter(pet => pet._id !== response.data._id));
+
           setAlert(() => ({
             type: "success",
             message: "Mascota eliminada correctamente"
@@ -121,7 +107,6 @@ function MyPets() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getPetsService();
       }
       catch(error) {
           setAlert(() => ({
