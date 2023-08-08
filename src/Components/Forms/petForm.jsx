@@ -57,7 +57,7 @@ function PetForm({ onSubmit, initialValues }) {
           Fecha de nacimiento: 
       </label>
       <input 
-        type="text" 
+        type="date" 
         id="birthdate" 
         name="birthdate"
         placeholder="Fecha de nacimiento" 
