@@ -9,7 +9,7 @@ function TagList() {
 	}
 
 	return (
-    <div className="flex flex-row space-x-4 mb-5 flex-wrap justify-between">
+    <div className="flex flex-row space-x-4 my-5 flex-wrap justify-between">
       <Tag tag="Agua" selectedTag={selectedTag} onClick={handleClick} />
       <Tag tag="Peso" selectedTag={selectedTag} onClick={handleClick} />
       <Tag tag="Comida" selectedTag={selectedTag} onClick={handleClick} />
