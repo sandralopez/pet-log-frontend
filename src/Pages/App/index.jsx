@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '../../Components/ProtectedRoute';
 import { AuthContextProvider } from '../../Context/AuthContext';
 import { PetContextProvider } from '../../Context/PetContext';
+import { TagContextProvider } from '../../Context/TagContext';
 import { Landing } from '../Landing';
 import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
@@ -43,9 +44,11 @@ function App() {
             path="/my-logs" 
             element={
               <PetContextProvider>
-                <ProtectedRoute>
-                  <MyLogs />
-                </ProtectedRoute>
+                <TagContextProvider>
+                  <ProtectedRoute>
+                    <MyLogs />
+                  </ProtectedRoute>
+                </TagContextProvider>
               </PetContextProvider>
             } 
           />
@@ -53,9 +56,11 @@ function App() {
             path="/my-logs/add"
             element={
               <PetContextProvider>
-                <ProtectedRoute>
-                  <Log />
-                </ProtectedRoute>
+                <TagContextProvider>
+                  <ProtectedRoute>
+                    <Log />
+                  </ProtectedRoute>
+                </TagContextProvider>
               </PetContextProvider>
             } 
           />
@@ -72,9 +77,11 @@ function App() {
           <Route 
             path="/my-tags" 
             element={
-              <ProtectedRoute>
-                <MyTags />
-              </ProtectedRoute>
+              <TagContextProvider>
+                <ProtectedRoute>
+                  <MyTags />
+                </ProtectedRoute>
+              </TagContextProvider>
             } 
           />
           <Route 

@@ -15,5 +15,4 @@ const AuthContextProvider = ({children}) => {
 	)
 }
 
-export { AuthContext }
-export { AuthContextProvider }
+export { AuthContext, AuthContextProvider }

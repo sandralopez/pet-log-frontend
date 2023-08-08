@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { TagContext } from '../../Context/TagContext';
 import { getTags, addTag, updateTag, deleteTag } from '../../Services/tag';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
@@ -7,33 +8,10 @@ import { Alert } from '../../Components/Alert';
 import { TagForm } from '../../Components/Forms/tagForm';
 
 function MyTags() {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useContext(TagContext);
   const [alert, setAlert] = useState({type: "", message:""})
   const [isEditMode, setIsEditMode] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-
-  useEffect(() =>{
-    getTagsService();
-  }, []);
-
-  async function getTagsService() {
-    try {
-      const response = await getTags();
-
-      if (response.status === "ok") {
-        setTags(response.data);
-      }
-      else {
-        throw Error('Ha ocurrido un error al obtener las etiquetas');
-      }
-    }
-    catch(error) {
-      setAlert(() => ({
-        type: "error",
-        message: "Ha ocurrido un error al obtener las etiquetas"
-      }));
-    }
-  }
 
   const handleReturn = () => {
     setIsEditMode(null);
@@ -59,6 +37,8 @@ function MyTags() {
           throw Error('Ha ocurrido un error al crear la nueva etiqueta');
         } 
         else {
+          setTags(prevTags => [...prevTags, response.data]);
+
           setAlert(() => ({
             type: "success",
             message: "Etiqueta creada correctamente"
@@ -67,7 +47,6 @@ function MyTags() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getTagsService();
       }
       catch(error) {
           setAlert(() => ({
@@ -85,6 +64,12 @@ function MyTags() {
           throw Error('Ha ocurrido un error al modificar la información de la etiqueta');
         } 
         else {
+          setTags(prevTags => {
+            return prevTags.map(tag =>
+              tag._id === _id ? { ...tag, ...response.data } : tag
+            );
+          });
+
           setAlert(() => ({
             type: "success",
             message: "Etiqueta modificada correctamente"
@@ -93,7 +78,6 @@ function MyTags() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getTagsService();
       }
       catch(error) {
           setAlert(() => ({
@@ -114,6 +98,8 @@ function MyTags() {
           throw Error('Ha ocurrido un error al eliminar la etiqueta');
         } 
         else {
+          setTags(tags.filter(tag => tag._id !== response.data._id));
+
           setAlert(() => ({
             type: "success",
             message: "Etiqueta eliminada correctamente"
@@ -122,7 +108,6 @@ function MyTags() {
 
         setIsEditMode(null);
         setSelectedItem(null);
-        getTagsService();
       }
       catch(error) {
           setAlert(() => ({

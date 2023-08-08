@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../Components/HomeLayout';
-import { TagList } from '../../Components/TagList';
 
 function Log() {
   return (
