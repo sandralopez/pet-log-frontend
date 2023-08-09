@@ -3,16 +3,16 @@ function Table({ rows, columns }) {
     <table className="border-collapse table-auto w-full text-sm mt-20">
       <thead>
         <tr>
-          {columns.map((column, index) => (
-            <th key={index} className="border-b font-medium p-4 pl-8 pt-0 pb-3 text-gray-500 text-left">{column}</th>
+          {columns.map((column, colIndex) => (
+            <th key={colIndex} className="border-b font-medium p-4 pl-8 pt-0 pb-3 text-gray-500 text-left">{column.header}</th>
           ))}
         </tr>
       </thead>
       <tbody className="bg-white dark:bg-slate-800">
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {row.map((cell, cellIndex) => (
-              <td key={cellIndex} className="border-b p-4 pl-8 text-gray-800">{cell}</td>
+            {columns.map((column, colIndex) => (
+              <td key={colIndex} className="border-b p-4 pl-8 text-gray-800">{column.accessor(row)}</td>
             ))}
           </tr>
         ))}

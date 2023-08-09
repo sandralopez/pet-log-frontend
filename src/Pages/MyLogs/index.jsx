@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
 import { PetContext } from '../../Context/PetContext';
-import { TagContext } from '../../Context/TagContext';
 import { getLogs, addLog, updateLog, deleteLog } from '../../Services/log';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
@@ -8,12 +7,38 @@ import { Alert } from '../../Components/Alert';
 import { LogForm } from '../../Components/Forms/logForm';
 
 function MyLogs() {
-  const [pets, setPets] = useContext(PetContext);
-  const [tags, setTags ] = useContext(TagContext);
-  const [selectedPet, setSelectedPet] = useState("");
+  const [pets, setPets] = useContext(PetContext);  
+  const [selectedPet, setSelectedPet] = useState(null);
   const [logs, setLogs] = useState([]);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
+
+  const columns = [
+    {
+      header: 'Fecha',
+      accessor: (row) => row.date
+    },
+    {
+      header: 'Etiqueta',
+      accessor: (row) => row.tag
+    },
+    {
+      header: 'Valor',
+      accessor: (row) => row.value
+    },
+  ];
+
+  useEffect(() => {
+    if (pets.length > 0) {
+      setSelectedPet(pets[0]._id);
+    }
+  }, [pets]);
+
+  useEffect(() => {
+    if (selectedPet !== null) {
+      getLogsService(selectedPet);
+    }
+  }, [selectedPet]);
 
   async function getLogsService(pet) {
     try {
@@ -32,14 +57,6 @@ function MyLogs() {
         message: "Ha ocurrido un error al obtener los registros"
       }));
     }
-  }
-
-  const handleChange = (event) => {
-    const petId = event.target.value;
-    
-    setSelectedPet(petId);
-
-    petId !== "" ? getLogsService(petId) : setLogs([]);
   }
 
   const handleReturn = () => {
@@ -152,10 +169,9 @@ function MyLogs() {
                   className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
                   Añadir nuevo
                 </button>
-                <div className="w-9/12 items-center my-5">
+                <div className="w-9/12 flex flex-col items-center my-5">
                   <label htmlFor="pet" className="font-light text-sm">Selecciona una de tus mascotas para ver un listado de sus registros: </label>
-                  <select id="pet" onChange={handleChange} className="w-80 my-4 border border-black p-3 rounded-xl">
-                    <option value="">Selecciona...</option>
+                  <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
                     {
                       pets?.map((pet) => (
                           <option key={pet._id} value={pet._id}>{pet.name}</option>
@@ -163,11 +179,10 @@ function MyLogs() {
                     }
                   </select>
                   { 
-
-                    logs.length > 0 ? (
-                      <span>Hay registros</span>
+                    logs.length === 0 ? (
+                      <span className="font-medium font-xl text-medium">No hay registros asociados a esta mascota</span>
                     ) : (
-                      <span>NO hay registros asociados </span>
+                      <Table rows={logs} columns={columns} />
                     )
                   }
                 </div>
