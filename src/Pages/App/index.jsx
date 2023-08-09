@@ -8,7 +8,6 @@ import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
 import { MyTags } from '../MyTags';
 import { MyLogs } from '../MyLogs';
-import { Log } from '../Log';
 import { SignIn } from '../SignIn';
 import { MyPets } from '../MyPets';
 import { SignUp } from '../SignUp';
@@ -47,18 +46,6 @@ function App() {
                 <TagContextProvider>
                   <ProtectedRoute>
                     <MyLogs />
-                  </ProtectedRoute>
-                </TagContextProvider>
-              </PetContextProvider>
-            } 
-          />
-          <Route 
-            path="/my-logs/add"
-            element={
-              <PetContextProvider>
-                <TagContextProvider>
-                  <ProtectedRoute>
-                    <Log />
                   </ProtectedRoute>
                 </TagContextProvider>
               </PetContextProvider>

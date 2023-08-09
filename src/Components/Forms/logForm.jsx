@@ -41,7 +41,7 @@ function LogForm({ onSubmit, initialValues }) {
       <div className="flex flex-row space-x-4 my-5 flex-wrap justify-between">
         {
             tags?.map((tag) => (
-                <Tag tag={tag.name} selectedTag={selectedTag} onClick={handleTagClick} />
+                <Tag key={tag._id} tag={tag.name} selectedTag={selectedTag} onClick={handleTagClick} />
             ))
         }
       </div>

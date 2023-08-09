@@ -8,7 +8,7 @@ import { LogForm } from '../../Components/Forms/logForm';
 
 function MyLogs() {
   const [pets, setPets] = useContext(PetContext);  
-  const [selectedPet, setSelectedPet] = useState(null);
+  const [selectedPet, setSelectedPet] = useState("");
   const [logs, setLogs] = useState([]);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
@@ -31,11 +31,13 @@ function MyLogs() {
   useEffect(() => {
     if (pets.length > 0) {
       setSelectedPet(pets[0]._id);
+    } else {
+      setSelectedPet("");
     }
   }, [pets]);
 
   useEffect(() => {
-    if (selectedPet !== null) {
+    if (selectedPet !== "") {
       getLogsService(selectedPet);
     }
   }, [selectedPet]);
