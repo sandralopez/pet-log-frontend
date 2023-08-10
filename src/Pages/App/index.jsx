@@ -55,9 +55,11 @@ function App() {
             path="/my-graphs" 
             element={
               <PetContextProvider>
-                <ProtectedRoute>
-                  <MyGraphs />
-                </ProtectedRoute>
+                <TagContextProvider>
+                  <ProtectedRoute>
+                    <MyGraphs />
+                  </ProtectedRoute>
+                </TagContextProvider>
               </PetContextProvider>
             } 
           />

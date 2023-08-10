@@ -13,6 +13,21 @@ export const getLogs = async (petId) => {
     }
 }
 
+export const getLogsByTag = async (petId, tagId) => {
+    try {
+        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`, {
+            params: {
+                tag: tagId
+            }
+        });
+  
+        return { status: 'ok', data: data };
+    }
+    catch(error) {
+        return { status: 'error', data: error.response };
+    }
+}
+
 export const getLog = async (petId, logId) => {
     try {
         const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs/${logId}`);
