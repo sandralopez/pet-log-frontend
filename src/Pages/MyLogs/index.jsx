@@ -20,7 +20,7 @@ function MyLogs() {
     },
     {
       header: 'Etiqueta',
-      accessor: (row) => row.tag
+      accessor: (row) => row.tagName
     },
     {
       header: 'Valor',
@@ -159,7 +159,7 @@ function MyLogs() {
           {
             isEditMode !== null ? (
               <>
-                <LogForm onSubmit={handleSubmit} initialValues={{tag: "", petId: pets[0]._id, value: "", date: "", detail: ""}} />
+                <LogForm onSubmit={handleSubmit} initialValues={{tagId: "", petId: pets[0]._id, value: "", date: "", detail: ""}} />
                 <a href="#" onClick={handleReturn}>Volver</a>
               </>
             ) : (
