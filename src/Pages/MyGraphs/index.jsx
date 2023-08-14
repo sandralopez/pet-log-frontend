@@ -48,7 +48,7 @@ function MyGraphs() {
         response.data.map(log => {
           setData(prevData => ([
             ...prevData, 
-            { name: log.date, value: log.value }
+            { name: new Date(log.date).toLocaleDateString(), value: log.value }
           ]));
         });
       }

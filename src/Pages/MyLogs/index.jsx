@@ -16,7 +16,7 @@ function MyLogs() {
   const columns = [
     {
       header: 'Fecha',
-      accessor: (row) => row.date
+      accessor: (row) => new Date(row.date).toLocaleDateString()
     },
     {
       header: 'Etiqueta',
