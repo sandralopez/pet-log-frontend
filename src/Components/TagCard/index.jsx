@@ -1,4 +1,4 @@
-function TagCard({ tag, datatype, measureUnit, timeUnit, onSelect, onDelete}) {
+function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 	return (
 		<div className="w-72 rounded shadow-lg">
 			<div className="px-6 py-4">
@@ -29,7 +29,6 @@ function TagCard({ tag, datatype, measureUnit, timeUnit, onSelect, onDelete}) {
 				<p id="unitTime" className="text-gray-700 text-sm mb-2">
 					{timeUnit}
 				</p>
-				<span className="text-gray-700 cursor-pointer text-xs mr-2" onClick={onSelect}>Editar</span>
 				<span className="text-gray-700 cursor-pointer text-xs mr-2" onClick={onDelete}>Eliminar</span>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { TagContext } from '../../Context/TagContext';
-import { getTags, addTag, updateTag, deleteTag } from '../../Services/tag';
+import { getTags, addTag, deleteTag } from '../../Services/tag';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
 import { TagCard } from '../../Components/TagCard';
@@ -10,81 +10,39 @@ import { TagForm } from '../../Components/Forms/tagForm';
 function MyTags() {
   const [tags, setTags] = useContext(TagContext);
   const [alert, setAlert] = useState({type: "", message:""})
-  const [isEditMode, setIsEditMode] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   const handleReturn = () => {
-    setIsEditMode(null);
-    setSelectedItem(null);
-  }
-
-  const handleEdit = (tag) => {
-    setIsEditMode(true);
-    setSelectedItem(tag);
+    setShowForm(false);
   }
 
   const handleCreate = () => {
-    setIsEditMode(false);
-    setSelectedItem(null);
+    setShowForm(true);
   }
 
   const handleSubmit = async (formData) => {
-    if (!isEditMode) {
-      try {
-        const response = await addTag(formData);
+    try {
+      const response = await addTag(formData);
 
-        if (response.status === 'error') {
-          throw Error('Ha ocurrido un error al crear la nueva etiqueta');
-        } 
-        else {
-          setTags(prevTags => [...prevTags, response.data]);
+      if (response.status === 'error') {
+        throw Error('Ha ocurrido un error al crear la nueva etiqueta');
+      } 
+      else {
+        setTags(prevTags => [...prevTags, response.data]);
 
-          setAlert(() => ({
-            type: "success",
-            message: "Etiqueta creada correctamente"
-          }));
-        }
-
-        setIsEditMode(null);
-        setSelectedItem(null);
+        setAlert(() => ({
+          type: "success",
+          message: "Etiqueta creada correctamente"
+        }));
       }
-      catch(error) {
-          setAlert(() => ({
-            type: "error",
-            message: "Ha ocurrido un error al crear la nueva etiqueta"
-          }));
-      }
-    } else if (isEditMode) {
-      try {
-        const { _id, created_at, ...updatedTag } = formData;
 
-        const response = await updateTag(_id, updatedTag);
-
-        if (response.status === 'error') {
-          throw Error('Ha ocurrido un error al modificar la información de la etiqueta');
-        } 
-        else {
-          setTags(prevTags => {
-            return prevTags.map(tag =>
-              tag._id === _id ? { ...tag, ...response.data } : tag
-            );
-          });
-
-          setAlert(() => ({
-            type: "success",
-            message: "Etiqueta modificada correctamente"
-          }));
-        }
-
-        setIsEditMode(null);
-        setSelectedItem(null);
-      }
-      catch(error) {
-          setAlert(() => ({
-            type: "error",
-            message: "Ha ocurrido un error al modificar la información de la etiqueta"
-          }));
-      }
+      setShowForm(false);
+    }
+    catch(error) {
+        setAlert(() => ({
+          type: "error",
+          message: "Ha ocurrido un error al crear la nueva etiqueta"
+        }));
     }
   };
 
@@ -106,8 +64,7 @@ function MyTags() {
           }));
         }
 
-        setIsEditMode(null);
-        setSelectedItem(null);
+        setShowForm(false);
       }
       catch(error) {
           setAlert(() => ({
@@ -125,9 +82,9 @@ function MyTags() {
             alert.type && <Alert alert={alert} setAlert={setAlert} /> 
           }
           {
-            isEditMode !== null ? (
+            showForm ? (
               <>
-                <TagForm onSubmit={handleSubmit} initialValues={selectedItem || {name: "", datatype: "", measureUnit: "", timeUnit: ""}} />
+                <TagForm onSubmit={handleSubmit} initialValues={{name: "", datatype: "", measureUnit: "", timeUnit: ""}} />
                 <a href="#" onClick={handleReturn}>Volver</a>
               </>
             ) : (
@@ -148,7 +105,6 @@ function MyTags() {
                       datatype={tag.datatype} 
                       measureUnit={tag.measureUnit} 
                       timeUnit={tag.timeUnit}
-                      onSelect={() => handleEdit(tag)}
                       onDelete={() => handleDelete(tag)} />
                   ))
                 }

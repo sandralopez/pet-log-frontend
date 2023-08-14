@@ -35,16 +35,6 @@ export const addTag = async (newTagData) => {
     }
 }
 
-export const updateTag = async (tagId, tagData) => {
-    try {
-        const { data } = await axiosPrivate.patch(`${baseUrl}/${tagId}`, tagData);
-        return { status: 'ok', data: data };
-    }
-    catch(error) {
-        return { status: 'error', data: error.response };
-    }
-}
-
 export const deleteTag = async (tagId) => {
     try {
         const { data } = await axiosPrivate.delete(`${baseUrl}/${tagId}`);
