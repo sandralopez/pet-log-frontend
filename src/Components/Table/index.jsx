@@ -8,7 +8,7 @@ function Table({ rows, columns }) {
           ))}
         </tr>
       </thead>
-      <tbody className="bg-white dark:bg-slate-800">
+      <tbody className="bg-white">
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {columns.map((column, colIndex) => (
