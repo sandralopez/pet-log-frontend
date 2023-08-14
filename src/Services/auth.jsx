@@ -1,12 +1,18 @@
 import axiosPublic from './AxiosConfig/axiosPublic';
 
-const baseUrl = `/auth/login`;
+const baseUrl = `/auth`;
 
 const loginService = async (credentials) => {
-  const { data } = await axiosPublic.post(baseUrl, credentials);
+  const { data } = await axiosPublic.post(`${baseUrl}/login`, credentials);
 
-  return data;
+  return { data};
 }
 
+const refreshTokenService = async() => {
+    const { data } = await axiosPublic.post(`${baseUrl}/refresh`);
 
-export { loginService };
+    return { token: data};
+};
+
+
+export { loginService, refreshTokenService };
