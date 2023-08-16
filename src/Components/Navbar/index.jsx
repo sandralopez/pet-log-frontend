@@ -20,6 +20,15 @@ function Navbar () {
 		    	isLogged
 		    		?
 		    			<div className="ml-5 flex w-[30%] items-center justify-end">
+							<ul	className="list-style-none flex flex-col pl-0 lg:mt-1 lg:flex-row">
+								<li className="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1">
+									<Link
+										to="/home"
+										className="active lg:px-2">
+										Mi Inicio
+									</Link>
+								</li>
+							</ul>
 							<Link
 								to='/'
 								onClick={logout}
