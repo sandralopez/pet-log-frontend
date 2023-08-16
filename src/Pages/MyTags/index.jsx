@@ -5,7 +5,7 @@ import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
 import { TagCard } from '../../Components/TagCard';
 import { Alert } from '../../Components/Alert';
-import { TagForm } from '../../Components/Forms/tagForm';
+import { TagForm } from '../../Components/TagForm';
 
 function MyTags() {
   const [tags, setTags] = useContext(TagContext);
@@ -85,7 +85,7 @@ function MyTags() {
             showForm ? (
               <>
                 <TagForm onSubmit={handleSubmit} initialValues={{name: "", datatype: "", measureUnit: "", timeUnit: ""}} />
-                <a href="#" onClick={handleReturn}>Volver</a>
+                <span className="cursor-pointer place-self-center" onClick={handleReturn}>Volver</span>
               </>
             ) : (
               <>
@@ -93,7 +93,7 @@ function MyTags() {
                   <button
                     type="button"
                     onClick={handleCreate}
-                    className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+                    className="button">
                     Añadir nueva
                   </button>
                 <div className="grid grid-cols-3 gap-x-4 gap-y-20 mt-10">

@@ -27,7 +27,7 @@ function PetForm({ onSubmit, initialValues }) {
       </div>
       <label 
         htmlFor="name" 
-        className="font-light text-sm">
+        className="label">
           Nombre: 
       </label>
       <input 
@@ -37,10 +37,10 @@ function PetForm({ onSubmit, initialValues }) {
         placeholder="Nombre" 
         value={formData.name}
         onChange={handleChange}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <label 
         htmlFor="species" 
-        className="font-light text-sm">
+        className="label">
           Especie: 
       </label>
       <input 
@@ -50,10 +50,10 @@ function PetForm({ onSubmit, initialValues }) {
         placeholder="Especie" 
         value={formData.species}
         onChange={handleChange}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <label 
         htmlFor="birthdate" 
-        className="font-light text-sm">
+        className="label">
           Fecha de nacimiento: 
       </label>
       <input 
@@ -63,10 +63,10 @@ function PetForm({ onSubmit, initialValues }) {
         placeholder="Fecha de nacimiento" 
         value={formData.birthdate}
         onChange={handleChange}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <button
         type="submit"
-        className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+        className="button button-full">
         Guardar
       </button>
     </form>

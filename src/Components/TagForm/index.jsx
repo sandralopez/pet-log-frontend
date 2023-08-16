@@ -21,7 +21,7 @@ function TagForm({ onSubmit, initialValues }) {
         <>
           <label 
             htmlFor="measureUnit" 
-            className="font-light text-sm">
+            className="label">
               Unidad de medida: 
           </label>
           <input 
@@ -31,7 +31,7 @@ function TagForm({ onSubmit, initialValues }) {
             placeholder="Kg, ml, gr..." 
             value={formData.measureUnit}
             onChange={handleChange}
-            className="w-full mb-5 border border-black p-3 rounded-xl" />
+            className="input" />
         </>
       )
     }
@@ -45,7 +45,7 @@ function TagForm({ onSubmit, initialValues }) {
         <>
           <label 
             htmlFor="timeUnit" 
-            className="font-light text-sm">
+            className="label">
               Unidad de tiempo: 
           </label>
           <input 
@@ -55,7 +55,7 @@ function TagForm({ onSubmit, initialValues }) {
             placeholder="Día, mes..."
             value={formData.timeUnit}
             onChange={handleChange} 
-            className="w-full mb-5 border border-black p-3 rounded-xl" />
+            className="input" />
         </>
       )
 
@@ -82,7 +82,7 @@ function TagForm({ onSubmit, initialValues }) {
     <form className="items-center w-80">
       <label 
         htmlFor="name" 
-        className="font-light text-sm">
+        className="label">
           Nombre: 
       </label>
       <input 
@@ -92,16 +92,21 @@ function TagForm({ onSubmit, initialValues }) {
         placeholder="Nombre" 
         onChange={handleChange}
         value={formData.name}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <label 
         htmlFor="datatype" 
-        className="font-light text-sm">
+        className="label">
           Tipo de dato: 
       </label>
-      <select id="datatype" name="datatype" value={formData.datatype} onChange={handleChange} className="w-full mb-5 border border-black p-3 rounded-xl">
-        <option value="0">Seleccione...</option>
-        <option value="Numero">Número</option>
-        <option value="Texto">Texto</option>
+      <select 
+        id="datatype" 
+        name="datatype" 
+        value={formData.datatype} 
+        onChange={handleChange} 
+        className="input">
+          <option value="0">Seleccione...</option>
+          <option value="Numero">Número</option>
+          <option value="Texto">Texto</option>
       </select>
 
       <div className="flex flex-row mb-5">
@@ -115,7 +120,7 @@ function TagForm({ onSubmit, initialValues }) {
         />
         <label 
           htmlFor="useUnitMeasure" 
-          className="font-light text-sm">
+          className="label">
           Usar unidad de medida: 
         </label>
       </div>
@@ -133,7 +138,7 @@ function TagForm({ onSubmit, initialValues }) {
         />
         <label 
           htmlFor="useUnitTime" 
-          className="font-light text-sm">
+          className="label">
           Usar unidad de tiempo: 
         </label>
       </div>
@@ -143,7 +148,7 @@ function TagForm({ onSubmit, initialValues }) {
       <button
         type="button"
         onClick={handleTagSubmit}
-        className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+        className="button button-full">
         Guardar
       </button>
     </form>

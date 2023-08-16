@@ -26,7 +26,7 @@ function Navbar () {
 							>
 								<button
 								  type="button"
-								  className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+								  className="button">
 								  Cerrar sesión
 								</button>
 							</Link>
@@ -47,7 +47,7 @@ function Navbar () {
 							>
 								<button
 								  type="button"
-								  className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+								  className="button">
 								  Regístrate
 								</button>
 							</Link>

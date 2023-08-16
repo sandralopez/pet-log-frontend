@@ -4,7 +4,7 @@ import { getLogs, addLog, updateLog, deleteLog } from '../../Services/log';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
 import { Alert } from '../../Components/Alert';
-import { LogForm } from '../../Components/Forms/logForm';
+import { LogForm } from '../../Components/LogForm';
 
 function MyLogs() {
   const [pets, setPets] = useContext(PetContext);  
@@ -160,7 +160,7 @@ function MyLogs() {
             isEditMode !== null ? (
               <>
                 <LogForm onSubmit={handleSubmit} initialValues={{tagId: "", petId: pets[0]._id, value: "", date: "", detail: ""}} />
-                <a href="#" onClick={handleReturn}>Volver</a>
+                <span className="cursor-pointer place-self-center" onClick={handleReturn}>Volver</span>
               </>
             ) : (
               <>
@@ -168,11 +168,11 @@ function MyLogs() {
                 <button
                   type="button"
                   onClick={handleCreate}
-                  className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+                  className="button">
                   Añadir nuevo
                 </button>
                 <div className="w-9/12 flex flex-col items-center my-5">
-                  <label htmlFor="pet" className="font-light text-sm">Selecciona una de tus mascotas para ver un listado de sus registros: </label>
+                  <label htmlFor="pet" className="label">Selecciona una de tus mascotas para ver un listado de sus registros: </label>
                   <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
                     {
                       pets?.map((pet) => (

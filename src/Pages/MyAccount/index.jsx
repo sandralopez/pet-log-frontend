@@ -106,38 +106,34 @@ function MyAccount() {
 
   const viewUserInfo = () => {
       return (
-          <div className="flex flex-col">
-            <div>
-              <p>
-                <span>Nombre de usuario: {username}</span>
-              </p>
-              <p>
-                <span>Email: {email}</span>
-              </p>
+          <>
+            <div className="w-full">
+              <p>Nombre de usuario: {username}</p>
+              <p>Email: {email}</p>
             </div>
             <button
               type="button"
               onClick={() => setView('edit-user-info')}
-              className="w-60 mr-3 mt-5 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+              className="button button-full mt-4">
               Editar
             </button>
             <button
               type="button"
               onClick={() => setView('edit-user-password')}
-              className="w-60 mr-3 mt-5 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+              className="button button-full">
               Cambiar contraseña
             </button>
-          </div>
+          </>
       );
   }
 
   const editUserInfo = () => {
       return (
         <>
-          <form className="items-center w-80">
+          <form>
             <label 
               htmlFor="username" 
-              className="font-light text-sm">
+              className="label">
                 Nombre de usuario: 
             </label>
             <input 
@@ -146,10 +142,11 @@ function MyAccount() {
               name="username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
-              placeholder="Nombre de usuario" className="w-full mb-5 border border-black p-3 rounded-xl" />
+              placeholder="Nombre de usuario" 
+              className="input" />
             <label 
               htmlFor="email" 
-              className="font-light text-sm">
+              className="label">
                 Email: 
             </label>
             <input 
@@ -159,10 +156,10 @@ function MyAccount() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="Dirección de email" 
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <label 
               htmlFor="password" 
-              className="font-light text-sm">
+              className="label">
                 Contraseña: 
             </label>
             <input 
@@ -172,11 +169,11 @@ function MyAccount() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="Minimo 8 caracteres" 
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <button
               type="button"
               onClick={handleUserInfoSubmit}
-              className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+              className="button button-full">
               Guardar
             </button>
           </form>
@@ -188,10 +185,10 @@ function MyAccount() {
   const editUserPassword = () => {
       return (
         <>
-          <form className="items-center w-80">
+          <form>
             <label 
               htmlFor="password" 
-              className="font-light text-sm">
+              className="label">
                 Contraseña anterior
             </label>
             <input 
@@ -200,10 +197,11 @@ function MyAccount() {
               name="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Contraseña actual" className="w-full mb-5 border border-black p-3 rounded-xl" />
+              placeholder="Contraseña actual" 
+              className="input" />
             <label 
               htmlFor="email" 
-              className="font-light text-sm">
+              className="label">
                 Nueva contraseña: 
             </label>
             <input 
@@ -213,10 +211,10 @@ function MyAccount() {
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
               placeholder="Nueva contraseña" 
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <label 
               htmlFor="password" 
-              className="font-light text-sm">
+              className="label">
                 Repetir contraseña: 
             </label>
             <input 
@@ -226,11 +224,11 @@ function MyAccount() {
               value={repeatPassword}
               onChange={(event) => setRepeatPassword(event.target.value)}
               placeholder="Repetir contraseña" 
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <button
               type="button"
               onClick={handleUserPasswordSubmit}
-              className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+              className="button button-full">
               Guardar
             </button>
           </form>
@@ -254,14 +252,14 @@ function MyAccount() {
   return (
       <HomeLayout>
         <div className="flex flex-col items-center mr-10 ml-10 h-auto pb-10 pt-3">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center w-80">
             <p className="font-medium text-xl">Mi cuenta</p>
             <p className="font-light text-medium mt-10 mb-10 text-center ml-10 mr-10">Revisa y edita la información de tu cuenta.</p>
             {
               alert.type && <Alert alert={alert} setAlert={setAlert} /> 
             }
-          </div>
           { renderView() }
+          </div>
         </div>
       </HomeLayout>
   );

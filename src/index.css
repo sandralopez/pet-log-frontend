@@ -18,4 +18,20 @@
 	.alert-warning {
 		@apply bg-[#FAEAB1] border-[#E5BA73] text-[#C58940];
 	}
+
+	.button {
+		@apply mr-3 inline-block bg-black px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl;
+	}
+
+	.button-full {
+		@apply py-3 w-full mb-5;
+	}
+
+	.input {
+		@apply w-full mb-5 border border-black p-3 rounded-xl;
+	}
+
+	.label {
+		@apply font-light text-sm;
+	}
 }

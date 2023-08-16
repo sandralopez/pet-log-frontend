@@ -4,7 +4,7 @@ import { addPet, updatePet, deletePet } from '../../Services/pet';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Pet } from '../../Components/Pet';
 import { Alert } from '../../Components/Alert';
-import { PetForm } from '../../Components/Forms/petForm';
+import { PetForm } from '../../Components/PetForm';
 
 function MyPets() {
   const [pets, setPets] = useContext(PetContext);
@@ -128,7 +128,7 @@ function MyPets() {
             isEditMode !== null ? (
               <>
                 <PetForm onSubmit={handleSubmit} initialValues={selectedItem || {name: "", species: "", birthdate: ""}} />
-                <a href="#" onClick={handleReturn}>Volver</a>
+                <span className="cursor-pointer place-self-center" onClick={handleReturn}>Volver</span>
               </>
             ) : (
               <>
@@ -136,7 +136,7 @@ function MyPets() {
                   <button
                     type="button"
                     onClick={handleCreate}
-                    className="mr-3 inline-block rounded bg-black px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl">
+                    className="button">
                     Añadir nueva
                   </button>
                 <div className="grid grid-cols-3 gap-x-4 gap-y-20 mt-10">

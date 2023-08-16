@@ -74,7 +74,7 @@ function MyGraphs() {
           }
         <div className="w-full my-5">
           <div className="flex flex-col w-1/2">
-            <label htmlFor="pet" className="font-light text-sm">Selecciona una de tus mascotas: </label>
+            <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
             <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
                 pets?.map((pet) => (
@@ -82,7 +82,7 @@ function MyGraphs() {
                 ))
               }
             </select>
-            <label htmlFor="tag" className="font-light text-sm">Selecciona el ítem que quieres visualizar en gráfica: </label>
+            <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar en gráfica: </label>
             <select id="tag" value={selectedTag} onChange={event => setSelectedTag(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
                 tags?.map((tag) => (

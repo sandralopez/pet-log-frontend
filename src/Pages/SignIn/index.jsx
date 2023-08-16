@@ -27,7 +27,7 @@ function SignIn({setToken}) {
           <form className="items-center" onSubmit={handleLoginSubmit}>
             <label 
               htmlFor="username" 
-              className="font-light text-sm">
+              className="label">
                 Nombre de usuario: 
             </label>
             <input 
@@ -36,10 +36,10 @@ function SignIn({setToken}) {
               value={username}
               placeholder="Nombre de usuario" 
               onChange={(event) => setUsername(event.target.value)}
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <label 
               htmlFor="password" 
-              className="font-light text-sm">
+              className="label">
                 Contraseña: 
             </label>
             <input 
@@ -48,10 +48,10 @@ function SignIn({setToken}) {
               value={password}
               placeholder="Contraseña" 
               onChange={(event) => setPassword(event.target.value)}
-              className="w-full mb-5 border border-black p-3 rounded-xl" />
+              className="input" />
             <p className="text-xs mb-5">He olvidado mi contraseña</p>
             <button
-              className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+              className="button button-full">
               Iniciar sesión
             </button>
             <div className="flex w-full justify-between">

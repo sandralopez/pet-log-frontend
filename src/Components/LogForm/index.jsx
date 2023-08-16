@@ -45,20 +45,25 @@ function LogForm({ onSubmit, initialValues }) {
             ))
         }
       </div>
-      <label htmlFor="petId" className="font-light text-sm">Mascota: </label>
+      <label htmlFor="petId" className="label">Mascota: </label>
         {
           alert.type && <Alert alert={alert} setAlert={setAlert} /> 
         }
-      <select id="petId" name="petId" onChange={handleChange} defaultValue={formData.petId} className="w-full mb-5 border border-black p-3 rounded-xl">
-        {
-          pets?.map((pet) => (
-            <option key={pet._id} value={pet._id}>{pet.name}</option>
-          ))
-        }
+      <select 
+        id="petId" 
+        name="petId" 
+        onChange={handleChange} 
+        defaultValue={formData.petId} 
+        className="input">
+          {
+            pets?.map((pet) => (
+              <option key={pet._id} value={pet._id}>{pet.name}</option>
+            ))
+          }
       </select>
       <label 
         htmlFor="value" 
-        className="font-light text-sm">
+        className="label">
           Valor: 
       </label>
       <input 
@@ -68,10 +73,10 @@ function LogForm({ onSubmit, initialValues }) {
         placeholder="Valor" 
         onChange={handleChange}
         value={formData.value}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <label 
         htmlFor="date" 
-        className="font-light text-sm">
+        className="label">
           Fecha: 
       </label>
       <input 
@@ -81,10 +86,10 @@ function LogForm({ onSubmit, initialValues }) {
         placeholder="Fecha" 
         onChange={handleChange}
         value={formData.date}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <label 
         htmlFor="detail" 
-        className="font-light text-sm">
+        className="label">
           Detalle: 
       </label>
       <textarea 
@@ -93,11 +98,11 @@ function LogForm({ onSubmit, initialValues }) {
         name="detail"
         onChange={handleChange}
         value={formData.detail}
-        className="w-full mb-5 border border-black p-3 rounded-xl" />
+        className="input" />
       <button
         type="button"
         onClick={handleLogSubmit}
-        className="mr-3 inline-block rounded bg-black px-6 py-4 text-xs font-medium uppercase leading-normal text-white rounded-xl w-full mb-5">
+        className="button button-full">
         Guardar
       </button>
     </form>
