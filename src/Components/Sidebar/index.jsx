@@ -1,7 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../CustomHooks/useAuth';
+
 import './styles.css';
 
 function Sidebar () {
+	const { logout } = useAuth();
+
 	return (
 		<div className="ml-10 min-h-0 flex-1 flex w-1/4">
 		    <nav id="sidebar" className="bg-white">
@@ -38,6 +42,7 @@ function Sidebar () {
 		            </NavLink>
 		            <NavLink 
 		            	to="/"
+		            	onClick={() => logout() }
 		            	className="text-black hover:text-red-700">
 		                <p className="text-center text-sm font-normal ">Cerrar sesión</p>
 		            </NavLink>

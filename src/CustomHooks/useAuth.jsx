@@ -20,6 +20,7 @@ const useAuth = () => {
 
 	const logout = () => {
 		window.sessionStorage.removeItem('jwt');
+		window.sessionStorage.removeItem('username');
 		setJwt(null);
 	}
 
