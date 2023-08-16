@@ -15,7 +15,7 @@ function AxiosPrivateInterceptor({ children }) {
     useEffect(() => {
 		const interceptorRequest = axiosPrivate.interceptors.request.use(
 		  async (config) => {
-		    if (jwtRef.current) {
+		    if (jwtRef.current && !config?.sent) {
 		      config.headers = {
 		        ...config.headers,
 		        authorization: `Bearer ${jwtRef.current}`,
