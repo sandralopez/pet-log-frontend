@@ -1,3 +1,5 @@
+import { TrashIcon } from '@heroicons/react/24/solid';
+
 function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 	return (
 		<div className="w-72 rounded shadow-lg">
@@ -29,7 +31,8 @@ function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 				<p id="unitTime" className="text-gray-700 text-sm mb-2">
 					{timeUnit}
 				</p>
-				<span className="text-gray-700 cursor-pointer text-xs mr-2" onClick={onDelete}>Eliminar</span>
+				
+				<TrashIcon className="h-5 w-5 text-gray-700 cursor-pointer" onClick={onDelete} />
 			</div>
 		</div>
 	)
