@@ -1,16 +1,20 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { TagContext } from '../../Context/TagContext';
-import { getTags, addTag, deleteTag } from '../../Services/tag';
+import { ModalContext } from '../../Context/ModalContext';
+import { addTag, deleteTag } from '../../Services/tag';
 import { HomeLayout } from '../../Components/HomeLayout';
-import { Table } from '../../Components/Table';
 import { TagCard } from '../../Components/TagCard';
-import { Alert } from '../../Components/Alert';
 import { TagForm } from '../../Components/TagForm';
+import { Alert } from '../../Components/Alert';
+import { Modal } from '../../Components/Modal';
 
 function MyTags() {
   const [tags, setTags] = useContext(TagContext);
+  const { showModal, setShowModal } = useContext(ModalContext);
   const [alert, setAlert] = useState({type: "", message:""})
   const [showForm, setShowForm] = useState(false);
+  const [deleteHandler, setDeleteHandler] = useState(null);
+  const [confirmMessage, setConfirmMessage] = useState("");
 
   const handleReturn = () => {
     setShowForm(false);
@@ -46,32 +50,39 @@ function MyTags() {
     }
   };
 
-  const handleDelete = async (tag) => {
-      try {
-        const { _id } = tag;
+  const handleConfirmDelete = (tag) => {
+    const handleDelete = async () => {
+        try {
+          const { _id } = tag;
 
-        const response = await deleteTag(_id);
+          const response = await deleteTag(_id);
 
-        if (response.status === 'error') {
-          throw Error('Ha ocurrido un error al eliminar la etiqueta');
-        } 
-        else {
-          setTags(tags.filter(tag => tag._id !== response.data._id));
+          if (response.status === 'error') {
+            throw Error('Ha ocurrido un error al eliminar la etiqueta');
+          } 
+          else {
+            setTags(tags.filter(tag => tag._id !== response.data._id));
 
-          setAlert(() => ({
-            type: "success",
-            message: "Etiqueta eliminada correctamente"
-          }));
+            setAlert(() => ({
+              type: "success",
+              message: "Etiqueta eliminada correctamente"
+            }));
+          }
+
+          setShowForm(false);
+          setShowModal(false);
         }
+        catch(error) {
+            setAlert(() => ({
+              type: "error",
+              message: "Ha ocurrido un error al eliminar la etiqueta"
+            }));
+        }
+    }
 
-        setShowForm(false);
-      }
-      catch(error) {
-          setAlert(() => ({
-            type: "error",
-            message: "Ha ocurrido un error al eliminar la etiqueta"
-          }));
-      }
+    setDeleteHandler(() => handleDelete);
+    setShowModal(true);
+    setConfirmMessage(`¿Deseas eliminar la etiqueta ${tag.name}?`)
   }
 
   return (
@@ -105,7 +116,7 @@ function MyTags() {
                       datatype={tag.datatype} 
                       measureUnit={tag.measureUnit} 
                       timeUnit={tag.timeUnit}
-                      onDelete={() => handleDelete(tag)} />
+                      onDelete={() => handleConfirmDelete(tag)} />
                   ))
                 }
                 </div>
@@ -113,6 +124,12 @@ function MyTags() {
             )
           }
       </div>
+
+      {
+        showModal && (
+          <Modal confirmMessage={confirmMessage} onConfirm={deleteHandler} />
+        )
+      }
     </HomeLayout>
   )
 }

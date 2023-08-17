@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '../../Components/ProtectedRoute';
 import { PetContextProvider } from '../../Context/PetContext';
 import { TagContextProvider } from '../../Context/TagContext';
+import { ModalContextProvider } from '../../Context/ModalContext';
 import { Landing } from '../Landing';
 import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
@@ -31,9 +32,11 @@ function App() {
           path="/my-pets" 
           element={
             <PetContextProvider>
-              <ProtectedRoute>
-                <MyPets />
-              </ProtectedRoute>
+              <ModalContextProvider>
+                <ProtectedRoute>
+                  <MyPets />
+                </ProtectedRoute>
+              </ModalContextProvider>
             </PetContextProvider>
           } 
         />
@@ -65,9 +68,11 @@ function App() {
           path="/my-tags" 
           element={
             <TagContextProvider>
-              <ProtectedRoute>
-                <MyTags />
-              </ProtectedRoute>
+              <ModalContextProvider>
+                <ProtectedRoute>
+                  <MyTags />
+                </ProtectedRoute>
+              </ModalContextProvider>
             </TagContextProvider>
           } 
         />
