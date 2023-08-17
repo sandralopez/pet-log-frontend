@@ -1,4 +1,5 @@
 import axiosPrivate from './AxiosConfig/axiosPrivate';
+import axiosPublic from './AxiosConfig/axiosPublic';
 
 const baseUrl = '/users';
 
@@ -6,17 +7,6 @@ export const getUser = async () => {
     try {
         const { data } = await axiosPrivate.get(`${baseUrl}/me`);
         
-        return { status: 'ok', data: data };
-    }
-    catch(error) {
-        return { status: 'error', data: error.response };
-    }
-}
-
-export const addUser = async (newUserData) => {
-    try {
-        const { data } = await axiosPrivate.post(baseUrl, newUserData);
-
         return { status: 'ok', data: data };
     }
     catch(error) {
@@ -38,6 +28,17 @@ export const updateUser = async (userData) => {
 export const deleteUser = async () => {
     try {
         const { data } = await axiosPrivate.delete(`${baseUrl}/me`);
+        return { status: 'ok', data: data };
+    }
+    catch(error) {
+        return { status: 'error', data: error.response };
+    }
+}
+
+export const registerUser = async (newUserData) => {
+    try {
+        const { data } = await axiosPublic.post(`${baseUrl}/register`, newUserData);
+
         return { status: 'ok', data: data };
     }
     catch(error) {

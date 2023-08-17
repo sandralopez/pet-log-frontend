@@ -14,5 +14,4 @@ const refreshTokenService = async() => {
     return { token: data};
 };
 
-
 export { loginService, refreshTokenService };
