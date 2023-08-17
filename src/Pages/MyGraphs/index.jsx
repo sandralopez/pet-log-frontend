@@ -2,8 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { getLogsByTag } from '../../Services/log';
 import { PetContext } from '../../Context/PetContext';
 import { TagContext } from '../../Context/TagContext';
-import { ChartBars } from '../../Components/Charts/barChart';
-import { ChartLines } from '../../Components/Charts/lineChart';
+import { ChartBars } from '../../Components/ChartBars';
+import { ChartLines } from '../../Components/ChartLines';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Alert } from '../../Components/Alert';
 
@@ -26,9 +26,9 @@ function MyGraphs() {
 
   useEffect(() => {
     if (tags.length > 0) {
-      setSelectedTag(tags[0]._id);
+      setSelectedTag(tags[0]);
     } else {
-      setSelectedTag("");
+      setSelectedTag({});
       setData([]);;
     }
   }, [tags]);
@@ -36,9 +36,19 @@ function MyGraphs() {
   useEffect(() => {
     if (selectedPet !== "" && selectedTag !== "") {
       setData([]);
-      getLogsByTagService(selectedPet, selectedTag);
+      getLogsByTagService(selectedPet, selectedTag._id);
     }
   }, [selectedPet, selectedTag]);
+
+  const handleSelectTag = (event) => {
+    const tagId = event.target.value;
+
+    tags?.map((tag) => {
+      if (tag._id === tagId) {
+        setSelectedTag(tag);
+      }
+    })
+  };
 
   async function getLogsByTagService(pet, tag) {
     try {
@@ -83,7 +93,7 @@ function MyGraphs() {
               }
             </select>
             <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar en gráfica: </label>
-            <select id="tag" value={selectedTag} onChange={event => setSelectedTag(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
+            <select id="tag" value={selectedTag._id} onChange={handleSelectTag} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
                 tags?.map((tag) => (
                     <option key={tag._id} value={tag._id}>{tag.name}</option>
@@ -91,9 +101,17 @@ function MyGraphs() {
               }
             </select>
           </div>
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-11/12 h-80 mt-4">
             {
-              data.length > 0 ? <ChartLines data={data} /> : <span className="font-medium font-xl">No hay registros para la selección</span>
+              data.length == 0 && <span className="font-medium font-xl">No hay registros para la selección</span> 
+            }
+
+            {
+              data.length > 0 && selectedTag.datatype === "Numero" && <ChartLines data={data} />
+            }
+
+            {
+              data.length > 0 && selectedTag.datatype === "Texto" && <ChartBars data={data} />
             }
           </div>
         </div>
