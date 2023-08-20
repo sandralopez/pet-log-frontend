@@ -55,7 +55,7 @@ function MyGraphs() {
       const response = await getLogsByTag(pet, tag);
 
       if (response.status === "ok") {
-        response.data.map(log => {
+        response.data.rows.map(log => {
           setData(prevData => ([
             ...prevData, 
             { name: new Date(log.date).toLocaleDateString(), value: log.value }

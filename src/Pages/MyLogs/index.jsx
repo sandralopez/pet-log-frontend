@@ -26,6 +26,10 @@ function MyLogs() {
       header: 'Valor',
       accessor: (row) => row.value
     },
+    {
+      header: 'Detalle', 
+      accessor: (row) => row.detail
+    }
   ];
 
   useEffect(() => {
@@ -47,7 +51,7 @@ function MyLogs() {
       const response = await getLogs(pet);
 
       if (response.status === "ok") {
-        setLogs(response.data);
+        setLogs(response.data.rows);
       }
       else {
         throw Error('Ha ocurrido un error al obtener los registros');
@@ -171,8 +175,8 @@ function MyLogs() {
                   className="button">
                   Añadir nuevo
                 </button>
-                <div className="w-9/12 flex flex-col items-center my-5">
-                  <label htmlFor="pet" className="label">Selecciona una de tus mascotas para ver un listado de sus registros: </label>
+                <div className="w-full flex flex-col my-5">
+                  <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
                   <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
                     {
                       pets?.map((pet) => (
