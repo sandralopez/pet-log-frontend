@@ -92,7 +92,7 @@ function MyGraphs() {
                 ))
               }
             </select>
-            <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar en gráfica: </label>
+            <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
             <select id="tag" value={selectedTag._id} onChange={handleSelectTag} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
                 tags?.map((tag) => (

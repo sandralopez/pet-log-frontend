@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { PetContext } from '../../Context/PetContext';
-import { getLogs, addLog, updateLog, deleteLog } from '../../Services/log';
+import { TagContext } from '../../Context/TagContext';
+import { getLogs, getLogsByTag, addLog, updateLog, deleteLog } from '../../Services/log';
 import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
 import { Alert } from '../../Components/Alert';
@@ -8,7 +9,9 @@ import { LogForm } from '../../Components/LogForm';
 
 function MyLogs() {
   const [pets, setPets] = useContext(PetContext);  
+  const [tags, setTags] = useContext(TagContext);
   const [selectedPet, setSelectedPet] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
   const [logs, setLogs] = useState([]);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
@@ -41,14 +44,14 @@ function MyLogs() {
   }, [pets]);
 
   useEffect(() => {
-    if (selectedPet !== "") {
-      getLogsService(selectedPet);
+    if (selectedPet !== "" || selectedTag !== "") {
+      getLogsService(selectedPet, selectedTag);
     }
-  }, [selectedPet]);
+  }, [selectedPet, selectedTag]);
 
-  async function getLogsService(pet) {
+  async function getLogsService(pet, tag) {
     try {
-      const response = await getLogs(pet);
+      const response = tag ? await getLogsByTag(pet, tag) : await getLogs(pet);
 
       if (response.status === "ok") {
         setLogs(response.data.rows);
@@ -181,6 +184,15 @@ function MyLogs() {
                     {
                       pets?.map((pet) => (
                           <option key={pet._id} value={pet._id}>{pet.name}</option>
+                      ))
+                    }
+                  </select>
+                  <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
+                  <select id="tag" value={selectedTag._id} onChange={event => setSelectedTag(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
+                    <option value="">Ver todos</option>
+                    {
+                      tags?.map((tag) => (
+                          <option key={tag._id} value={tag._id}>{tag.name}</option>
                       ))
                     }
                   </select>

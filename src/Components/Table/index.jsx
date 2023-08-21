@@ -1,6 +1,6 @@
 function Table({ rows, columns }) {
   return (
-    <table className="border-collapse table-auto w-full text-sm mt-20">
+    <table className="border-collapse table-auto w-full text-sm mt-10">
       <thead>
         <tr>
           {columns.map((column, colIndex) => (
