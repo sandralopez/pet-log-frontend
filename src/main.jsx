@@ -9,11 +9,10 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <AxiosPrivateInterceptor>
+      <AxiosPrivateInterceptor />
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </AxiosPrivateInterceptor>
     </AuthContextProvider>
   </React.StrictMode>,
 )

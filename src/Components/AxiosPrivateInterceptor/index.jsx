@@ -67,7 +67,7 @@ function AxiosPrivateInterceptor({ children }) {
 		}
     }, []);
 
-    return children;
+    return null;
 }
 
 export { AxiosPrivateInterceptor };
