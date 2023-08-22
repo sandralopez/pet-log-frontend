@@ -2,9 +2,16 @@ import axiosPrivate from './AxiosConfig/axiosPrivate';
 
 const baseUrl = '/users/me/pets';
 
-export const getLogs = async (petId) => {
+export const getLogs = async (petId, pagination = null) => {
     try {
-        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`);
+        const params = {};
+
+        if (pagination) {
+            params.page = pagination.currentPage,
+            params.size = pagination.size
+        }
+
+        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`, { params });
         
         return { status: 'ok', data: data };
     }
@@ -13,13 +20,18 @@ export const getLogs = async (petId) => {
     }
 }
 
-export const getLogsByTag = async (petId, tagId) => {
+export const getLogsByTag = async (petId, tagId, pagination = null) => {
     try {
-        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`, {
-            params: {
-                tag: tagId
-            }
-        });
+        const params = {
+            tag: tagId
+        };
+
+        if (pagination) {
+            params.page = pagination.currentPage,
+            params.size = pagination.size
+        }
+
+        const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`, { params });
   
         return { status: 'ok', data: data };
     }

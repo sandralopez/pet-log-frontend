@@ -27,6 +27,10 @@
 		@apply py-3 w-full mb-5;
 	}
 
+	.button-pagination {
+		@apply mx-2 inline-block bg-gray-300 px-2 py-2 text-xs font-medium uppercase leading-normal text-gray-700 rounded-xl;
+	}
+
 	.input {
 		@apply w-full mb-5 border border-black p-3 rounded-xl;
 	}

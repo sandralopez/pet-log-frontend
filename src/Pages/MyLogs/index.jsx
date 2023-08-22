@@ -6,6 +6,7 @@ import { HomeLayout } from '../../Components/HomeLayout';
 import { Table } from '../../Components/Table';
 import { Alert } from '../../Components/Alert';
 import { LogForm } from '../../Components/LogForm';
+import { Pagination } from '../../Components/Pagination';
 
 function MyLogs() {
   const [pets, setPets] = useContext(PetContext);  
@@ -15,6 +16,8 @@ function MyLogs() {
   const [logs, setLogs] = useState([]);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
+  const [pagination, setPagination] = useState({ currentPage: 1, size: 10 });
+  const [pageCount, setPageCount] = useState(null);
 
   const columns = [
     {
@@ -47,13 +50,14 @@ function MyLogs() {
     if (selectedPet !== "" || selectedTag !== "") {
       getLogsService(selectedPet, selectedTag);
     }
-  }, [selectedPet, selectedTag]);
+  }, [selectedPet, selectedTag, pagination]);
 
   async function getLogsService(pet, tag) {
     try {
-      const response = tag ? await getLogsByTag(pet, tag) : await getLogs(pet);
+      const response = tag ? await getLogsByTag(pet, tag, pagination) : await getLogs(pet, pagination);
 
       if (response.status === "ok") {
+        setPageCount(response.data.pageCount);
         setLogs(response.data.rows);
       }
       else {
@@ -66,18 +70,6 @@ function MyLogs() {
         message: "Ha ocurrido un error al obtener los registros"
       }));
     }
-  }
-
-  const handleReturn = () => {
-    setIsEditMode(null);
-  }
-
-  const handleEdit = (pet) => {
-    setIsEditMode(true);
-  }
-
-  const handleCreate = () => {
-    setIsEditMode(false);
   }
 
   const handleSubmit = async (formData) => {
@@ -156,6 +148,29 @@ function MyLogs() {
       }
   }
 
+  const handlePageChange = (newPage) => {
+    setPagination((prevData) => ({
+      ...prevData,
+      currentPage: newPage
+    }))
+  }
+
+  const handlePetChange = (event) => {
+    setSelectedPet(event.target.value);
+    setPagination((prevData) => ({
+      ...prevData,
+      currentPage: 1
+    }))
+  }
+
+  const handleTagChange = (event) => {
+    setSelectedTag(event.target.value);
+    setPagination((prevData) => ({
+      ...prevData,
+      currentPage: 1
+    }))
+  }
+
   return (
     <HomeLayout>
       <div className="flex flex-col items-center mr-10 ml-10 h-auto pb-10 pt-3">
@@ -167,20 +182,20 @@ function MyLogs() {
             isEditMode !== null ? (
               <>
                 <LogForm onSubmit={handleSubmit} initialValues={{tagId: "", petId: pets[0]._id, value: "", date: "", detail: ""}} />
-                <span className="cursor-pointer place-self-center" onClick={handleReturn}>Volver</span>
+                <span className="cursor-pointer place-self-center" onClick={() => setIsEditMode(null) }>Volver</span>
               </>
             ) : (
               <>
                 <p className="font-light text-medium mt-10 mb-10 text-center ml-10 mr-10">Añade y visualiza los registros de tus mascotas.</p>
                 <button
                   type="button"
-                  onClick={handleCreate}
+                  onClick={() => setIsEditMode(false) }
                   className="button">
                   Añadir nuevo
                 </button>
                 <div className="w-full flex flex-col my-5">
                   <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
-                  <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
+                  <select id="pet" value={selectedPet} onChange={handlePetChange} className="w-80 my-4 border border-black p-3 rounded-xl">
                     {
                       pets?.map((pet) => (
                           <option key={pet._id} value={pet._id}>{pet.name}</option>
@@ -188,7 +203,7 @@ function MyLogs() {
                     }
                   </select>
                   <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
-                  <select id="tag" value={selectedTag._id} onChange={event => setSelectedTag(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
+                  <select id="tag" value={selectedTag._id} onChange={handleTagChange} className="w-80 my-4 border border-black p-3 rounded-xl">
                     <option value="">Ver todos</option>
                     {
                       tags?.map((tag) => (
@@ -200,7 +215,14 @@ function MyLogs() {
                     logs.length === 0 ? (
                       <span className="font-medium font-xl text-medium">No hay registros asociados a esta mascota</span>
                     ) : (
-                      <Table rows={logs} columns={columns} />
+                      <>
+                        <Table rows={logs} columns={columns} />
+                        <Pagination
+                          currentPage={pagination.currentPage}
+                          pageCount={pageCount}
+                          onPageChange={handlePageChange}
+                        />
+                      </>
                     )
                   }
                 </div>
