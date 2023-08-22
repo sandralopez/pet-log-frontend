@@ -19,7 +19,7 @@ function PetForm({ onSubmit, initialValues }) {
   }
 
   return (
-    <form className="items-center w-80" onSubmit={handlePetSubmit}>
+    <form className="items-center w-80 mt-4" onSubmit={handlePetSubmit}>
       <div className="flex justify-center">
         <div className="mb-5 w-20 h-20 flex justify-center items-center rounded-full bg-gray-300">
           <img src="#" className="rounded-full" />
@@ -36,8 +36,7 @@ function PetForm({ onSubmit, initialValues }) {
         name="name"
         placeholder="Nombre" 
         value={formData.name}
-        onChange={handleChange}
-        className="input" />
+        onChange={handleChange} />
       <label 
         htmlFor="species" 
         className="label">
@@ -49,8 +48,7 @@ function PetForm({ onSubmit, initialValues }) {
         name="species"
         placeholder="Especie" 
         value={formData.species}
-        onChange={handleChange}
-        className="input" />
+        onChange={handleChange} />
       <label 
         htmlFor="birthdate" 
         className="label">
@@ -62,8 +60,7 @@ function PetForm({ onSubmit, initialValues }) {
         name="birthdate"
         placeholder="Fecha de nacimiento" 
         value={formData.birthdate}
-        onChange={handleChange}
-        className="input" />
+        onChange={handleChange} />
       <button
         type="submit"
         className="button button-full">

@@ -5,7 +5,7 @@ function Navbar () {
 	const { isLogged, logout } = useAuth();
 
 	return (
-		<nav className="relative flex w-full flex-wrap items-center justify-between py-2 shadow-lg lg:py-4 mb-10">
+		<nav className="relative flex w-full flex-wrap items-center justify-between py-2 shadow-lg dark:shadow-slate-600 lg:py-4 mb-10">
 		  <div className="flex w-full flex-wrap items-center justify-between px-3">
 		    <div className="ml-2">
 		      <Link

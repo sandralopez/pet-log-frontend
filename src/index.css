@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	input, select, textarea {
+		@apply bg-white dark:bg-slate-700 w-full mb-5 border border-black p-3 rounded-xl;
+	}
+}
+
 @layer components {
 	.alert-success {
 		@apply bg-[#DDFFBB] border-[#C7E9B0] text-[#A4BC92];
@@ -20,7 +26,7 @@
 	}
 
 	.button {
-		@apply mr-3 inline-block bg-black px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white rounded-xl;
+		@apply mr-3 inline-block bg-black dark:bg-purple-300 px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white dark:text-black rounded-xl;
 	}
 
 	.button-full {
@@ -31,11 +37,11 @@
 		@apply mx-2 inline-block bg-gray-300 px-2 py-2 text-xs font-medium uppercase leading-normal text-gray-700 rounded-xl;
 	}
 
-	.input {
-		@apply w-full mb-5 border border-black p-3 rounded-xl;
-	}
-
 	.label {
 		@apply font-light text-sm;
+	}
+
+	#sidebar a.active {
+		@apply underline text-red-700 dark:text-cyan-400;
 	}
 }

@@ -35,8 +35,7 @@ function SignIn({setToken}) {
               id="username" 
               value={username}
               placeholder="Nombre de usuario" 
-              onChange={(event) => setUsername(event.target.value)}
-              className="input" />
+              onChange={(event) => setUsername(event.target.value)} />
             <label 
               htmlFor="password" 
               className="label">
@@ -47,8 +46,7 @@ function SignIn({setToken}) {
               id="password" 
               value={password}
               placeholder="Contraseña" 
-              onChange={(event) => setPassword(event.target.value)}
-              className="input" />
+              onChange={(event) => setPassword(event.target.value)} />
             <p className="text-xs mb-5">He olvidado mi contraseña</p>
             <button
               className="button button-full">

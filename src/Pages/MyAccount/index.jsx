@@ -142,8 +142,7 @@ function MyAccount() {
               name="username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
-              placeholder="Nombre de usuario" 
-              className="input" />
+              placeholder="Nombre de usuario"  />
             <label 
               htmlFor="email" 
               className="label">
@@ -155,8 +154,7 @@ function MyAccount() {
               name="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="Dirección de email" 
-              className="input" />
+              placeholder="Dirección de email"  />
             <label 
               htmlFor="password" 
               className="label">
@@ -168,8 +166,7 @@ function MyAccount() {
               name="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Minimo 8 caracteres" 
-              className="input" />
+              placeholder="Minimo 8 caracteres"  />
             <button
               type="button"
               onClick={handleUserInfoSubmit}
@@ -197,8 +194,7 @@ function MyAccount() {
               name="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Contraseña actual" 
-              className="input" />
+              placeholder="Contraseña actual"  />
             <label 
               htmlFor="email" 
               className="label">
@@ -210,8 +206,7 @@ function MyAccount() {
               name="newPassword"
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
-              placeholder="Nueva contraseña" 
-              className="input" />
+              placeholder="Nueva contraseña"  />
             <label 
               htmlFor="password" 
               className="label">
@@ -223,8 +218,7 @@ function MyAccount() {
               name="repeatPassword"
               value={repeatPassword}
               onChange={(event) => setRepeatPassword(event.target.value)}
-              placeholder="Repetir contraseña" 
-              className="input" />
+              placeholder="Repetir contraseña"  />
             <button
               type="button"
               onClick={handleUserPasswordSubmit}

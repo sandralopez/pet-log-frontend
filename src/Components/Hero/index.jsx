@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Hero() {
 	return (
 		<div className="flex w-full h-80 mb-20 mt-20 items-center">
-			<div className="flex w-1/2 bg-gray-100 pl-20 pr-20 h-full items-center">
+			<div className="flex w-1/2 bg-gray-100 dark:bg-slate-700 pl-20 pr-20 h-full items-center">
 				<div className="flex-row">
 					<p className="font-bold text-xl">
 						Toda la información de tu mejor amigo en un único lugar
@@ -22,7 +22,7 @@ function Hero() {
 					</Link>
 				</div>
 			</div>
-			<div className="flex-row w-1/2 h-full bg-gray-300">
+			<div className="flex-row w-1/2 h-full bg-gray-300 dark:bg-slate-600">
 
 			</div>
 		</div>

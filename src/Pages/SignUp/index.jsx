@@ -63,8 +63,7 @@ function SignUp() {
               name="email"
               placeholder="Dirección de email" 
               onChange={handleChange}
-              value={formData.email}
-              className="input" />
+              value={formData.email} />
             <label 
               htmlFor="username" 
               className="label">
@@ -76,8 +75,7 @@ function SignUp() {
               name="username"
               placeholder="Nombre de usuario" 
               onChange={handleChange}
-              value={formData.username}
-              className="input" />
+              value={formData.username} />
             <label 
               htmlFor="password" 
               className="label">
@@ -89,8 +87,7 @@ function SignUp() {
               name="password"
               placeholder="Minimo 8 caracteres" 
               onChange={handleChange}
-              value={formData.password}
-              className="input" />
+              value={formData.password}/>
             <label 
               htmlFor="repeatPassword" 
               className="label">
@@ -102,8 +99,7 @@ function SignUp() {
               name="repeatPassword"
               placeholder="Repite la contraseña" 
               onChange={handleChange}
-              value={formData.repeatPassword}
-              className="input" />
+              value={formData.repeatPassword} />
             <button
               type="submit"
               className="button button-full">

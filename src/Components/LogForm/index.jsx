@@ -53,8 +53,7 @@ function LogForm({ onSubmit, initialValues }) {
         id="petId" 
         name="petId" 
         onChange={handleChange} 
-        defaultValue={formData.petId} 
-        className="input">
+        defaultValue={formData.petId}>
           {
             pets?.map((pet) => (
               <option key={pet._id} value={pet._id}>{pet.name}</option>
@@ -72,8 +71,7 @@ function LogForm({ onSubmit, initialValues }) {
         name="value"
         placeholder="Valor" 
         onChange={handleChange}
-        value={formData.value}
-        className="input" />
+        value={formData.value} />
       <label 
         htmlFor="date" 
         className="label">
@@ -85,8 +83,7 @@ function LogForm({ onSubmit, initialValues }) {
         name="date"
         placeholder="Fecha" 
         onChange={handleChange}
-        value={formData.date}
-        className="input" />
+        value={formData.date} />
       <label 
         htmlFor="detail" 
         className="label">
@@ -97,8 +94,7 @@ function LogForm({ onSubmit, initialValues }) {
         id="detail" 
         name="detail"
         onChange={handleChange}
-        value={formData.detail}
-        className="input" />
+        value={formData.detail} />
       <button
         type="button"
         onClick={handleLogSubmit}

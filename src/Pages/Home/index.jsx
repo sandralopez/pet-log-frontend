@@ -16,7 +16,7 @@ function Home() {
             description="Registra de forma sencilla los eventos de tu mascota para analizar sus hábitos y controlar su salud." 
           >
             <div className="flex justify-center">
-              <ListBulletIcon className="h-10 w-10 text-gray-700" />
+              <ListBulletIcon className="h-10 w-10" />
             </div>
           </Card>
           <Card 
@@ -24,7 +24,7 @@ function Home() {
             description="Visualiza las gráficas y obtén informes de los eventos registrados para realizar  seguimiento y facilitar la comunicación con su veterinario." 
           >
             <div className="flex justify-center">
-              <ChartBarIcon className="h-10 w-10 text-gray-700" />
+              <ChartBarIcon className="h-10 w-10" />
             </div>
           </Card>
           <Card 
@@ -32,7 +32,7 @@ function Home() {
             description="Programa recordatorios para sus tratamientos y vacunas y recibe notificaciones cuando se acerque la fecha de la próxima cita veterinaria. " 
           >
             <div className="flex justify-center">
-              <ClockIcon className="h-10 w-10 text-gray-700" />
+              <ClockIcon className="h-10 w-10" />
             </div>
           </Card>
         </div>

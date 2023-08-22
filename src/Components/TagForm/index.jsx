@@ -30,8 +30,7 @@ function TagForm({ onSubmit, initialValues }) {
             name="measureUnit"
             placeholder="Kg, ml, gr..." 
             value={formData.measureUnit}
-            onChange={handleChange}
-            className="input" />
+            onChange={handleChange} />
         </>
       )
     }
@@ -54,8 +53,7 @@ function TagForm({ onSubmit, initialValues }) {
             name="timeUnit"
             placeholder="Día, mes..."
             value={formData.timeUnit}
-            onChange={handleChange} 
-            className="input" />
+            onChange={handleChange}  />
         </>
       )
 
@@ -79,7 +77,7 @@ function TagForm({ onSubmit, initialValues }) {
   }
 
   return (
-    <form className="items-center w-80">
+    <form className="items-center w-80 mt-4">
       <label 
         htmlFor="name" 
         className="label">
@@ -91,8 +89,7 @@ function TagForm({ onSubmit, initialValues }) {
         name="name"
         placeholder="Nombre" 
         onChange={handleChange}
-        value={formData.name}
-        className="input" />
+        value={formData.name} />
       <label 
         htmlFor="datatype" 
         className="label">
@@ -102,8 +99,7 @@ function TagForm({ onSubmit, initialValues }) {
         id="datatype" 
         name="datatype" 
         value={formData.datatype} 
-        onChange={handleChange} 
-        className="input">
+        onChange={handleChange} >
           <option value="0">Seleccione...</option>
           <option value="Numero">Número</option>
           <option value="Texto">Texto</option>
@@ -114,7 +110,7 @@ function TagForm({ onSubmit, initialValues }) {
           type="checkbox" 
           id="useUnitMeasure" 
           name="useUnitMeasure"
-          className="accent-black w-5 h-5 rounded-xl mr-2"
+          className="accent-black dark:accent-purple-300 w-5 h-5 rounded-xl mr-2"
           onChange={ () => setUseUnitMeasure(!useUnitMeasure) }
           checked={useUnitMeasure}
         />
@@ -132,7 +128,7 @@ function TagForm({ onSubmit, initialValues }) {
           type="checkbox" 
           id="useUnitTime" 
           name="useUnitTime"
-          className="accent-black w-5 h-5 rounded-xl mr-2"
+          className="accent-black dark:accent-purple-300 w-5 h-5 rounded-xl mr-2"
           onChange={ () => setUseUnitTime(!useUnitTime) }
           checked={useUnitTime}
         />
