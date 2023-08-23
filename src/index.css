@@ -4,7 +4,7 @@
 
 @layer base {
 	input, select, textarea {
-		@apply bg-white dark:bg-slate-700 w-full mb-5 border border-black p-3 rounded-xl;
+		@apply bg-white dark:bg-slate-800 w-full mb-5 border border-black p-3 rounded-xl;
 	}
 }
 

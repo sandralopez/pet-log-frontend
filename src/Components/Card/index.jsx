@@ -1,6 +1,6 @@
 function Card({ title, description, children }) {
 	return (
-		<div className="w-72 rounded-xl shadow-lg dark:shadow-slate-600 dark:bg-slate-700 p-2">
+		<div className="w-72 rounded-xl shadow-lg dark:shadow-slate-700 dark:bg-slate-800 p-2">
 			{ children }
 			<div className="px-6 py-4">
 				<div className="text-xl mb-2">{title}</div>

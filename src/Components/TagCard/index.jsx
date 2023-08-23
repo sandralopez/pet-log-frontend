@@ -2,7 +2,7 @@ import { TrashIcon } from '@heroicons/react/24/solid';
 
 function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 	return (
-		<div className="w-72 rounded-xl shadow-lg dark:shadow-slate-600 dark:bg-slate-700 text-gray-700 dark:text-slate-300">
+		<div className="w-72 rounded-xl shadow-lg dark:shadow-slate-700 dark:bg-slate-800 text-gray-700 dark:text-slate-300">
 			<div className="px-6 py-4">
 				<p className="text-xl mb-2">
 					{tag}

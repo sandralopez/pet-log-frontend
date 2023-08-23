@@ -8,8 +8,8 @@ function Modal({ confirmMessage, onConfirm }) {
   return (
     <>
       createPortal(
-        <div className="bg-white/80 dark:bg-slate-800/70 flex justify-center items-center fixed inset-x-0 inset-y-0">
-          <div className="flex items-center content-center bg-white dark:bg-slate-600 w-80 h-60 rounded-xl shadow-slate-500 dark:shadow-slate-500 shadow-2xl">
+        <div className="bg-white/80 dark:bg-slate-900/70 flex justify-center items-center fixed inset-x-0 inset-y-0">
+          <div className="flex items-center content-center bg-white dark:bg-slate-700 w-80 h-60 rounded-xl shadow-slate-500 dark:shadow-slate-600 shadow-2xl">
             <div className="flex flex-col items-center w-full">
               <p className="text-center">{confirmMessage}</p>
               <div className="mt-5">
