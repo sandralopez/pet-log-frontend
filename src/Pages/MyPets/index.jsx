@@ -24,7 +24,10 @@ function MyPets() {
 
   const handleEdit = (pet) => {
     setIsEditMode(true);
-    setSelectedItem(pet);
+    setSelectedItem({
+      ...pet,
+      birthdate: new Date(pet.birthdate).toISOString().split('T')[0]
+    });
   }
 
   const handleCreate = () => {
