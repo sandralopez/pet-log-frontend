@@ -81,6 +81,22 @@ function MyLogs() {
           throw Error('Ha ocurrido un error al crear el registro');
         } 
         else {
+          setLogs(logs => ([
+            ...logs,
+            {
+              tagId: response.data.tag,
+              petId: response.data.pet,
+              value: response.data.value,
+              date: response.data.date,
+              detail: response.data.detail
+            }
+          ]));
+
+          setPagination((prevData) => ({
+            ...prevData,
+            currentPage: 1
+          }));
+
           setAlert(() => ({
             type: "success",
             message: "Registro creado correctamente"
