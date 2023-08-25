@@ -1,11 +1,10 @@
-import axiosPublic from './AxiosConfig/axiosPublic';
+import axiosPrivate from './AxiosConfig/axiosPrivate';
 
 const baseUrl = `/comments`;
 
 const addComment = async (comment) => {
-  console.log(comment)
     try {
-        const { data } = await axiosPublic.post(`${baseUrl}`, comment);
+        const { data } = await axiosPrivate.post(`${baseUrl}`, comment);
 
         return { status: 'ok', data: data };
     }

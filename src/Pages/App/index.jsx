@@ -8,6 +8,7 @@ import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
 import { MyTags } from '../MyTags';
 import { MyLogs } from '../MyLogs';
+import { Contact } from '../Contact';
 import { SignIn } from '../SignIn';
 import { MyPets } from '../MyPets';
 import { SignUp } from '../SignUp';
@@ -74,6 +75,14 @@ function App() {
                 </ProtectedRoute>
               </ModalContextProvider>
             </TagContextProvider>
+          } 
+        />
+        <Route 
+          path="/contact" 
+          element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
           } 
         />
         <Route 
