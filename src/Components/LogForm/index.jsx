@@ -1,9 +1,8 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { PetContext } from '../../Context/PetContext';
 import { TagContext } from '../../Context/TagContext';
 import { Tag } from '../Tag';
 import { Alert } from '../../Components/Alert';
-import { getPets } from '../../Services/pet';
 
 function LogForm({ onSubmit, initialValues }) {
   const [formData, setFormData] = useState(initialValues);
