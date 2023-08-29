@@ -44,4 +44,12 @@
 	#sidebar a.active {
 		@apply underline text-red-700 dark:text-cyan-400;
 	}
+
+	.tab {
+		@apply mr-4 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:text-gray-500 dark:hover:text-slate-200 dark:hover:bg-slate-600 rounded-xl py-4 px-4 text-sm font-medium text-center cursor-pointer;
+	}
+
+	.tab.active {
+		@apply bg-slate-300 dark:bg-slate-700 dark:text-slate-200;
+	}
 }

@@ -8,6 +8,7 @@ import { MyAccount } from '../MyAccount';
 import { MyGraphs } from '../MyGraphs';
 import { MyTags } from '../MyTags';
 import { MyLogs } from '../MyLogs';
+import { MyReminders } from '../MyReminders';
 import { Contact } from '../Contact';
 import { SignIn } from '../SignIn';
 import { MyPets } from '../MyPets';
@@ -75,6 +76,18 @@ function App() {
                 </ProtectedRoute>
               </ModalContextProvider>
             </TagContextProvider>
+          } 
+        />
+        <Route 
+          path="/my-reminders" 
+          element={
+            <PetContextProvider>
+              <ModalContextProvider>
+                <ProtectedRoute>
+                  <MyReminders />
+                </ProtectedRoute>
+              </ModalContextProvider>
+            </PetContextProvider>
           } 
         />
         <Route 

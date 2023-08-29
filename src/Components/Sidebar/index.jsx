@@ -34,6 +34,11 @@ function Sidebar () {
 		                <p className="text-center text-sm font-normal ">Gráficas</p>
 		            </NavLink>
 		            <NavLink 
+		            	to="/my-reminders"
+		            	className="text-black dark:text-slate-300 hover:text-red-700 dark:hover:text-cyan-400">
+		                <p className="text-center text-sm font-normal ">Recordatorios</p>
+		            </NavLink>
+		            <NavLink 
 		            	to="/contact"
 		            	className="text-black dark:text-slate-300 hover:text-red-700 dark:hover:text-cyan-400">
 		                <p className="text-center text-sm font-normal ">Contacto</p>
