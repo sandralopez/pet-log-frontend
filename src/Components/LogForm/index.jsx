@@ -52,7 +52,7 @@ function LogForm({ onSubmit, initialValues }) {
         id="petId" 
         name="petId" 
         onChange={handleChange} 
-        defaultValue={formData.petId}>
+        value={formData.petId}>
           {
             pets?.map((pet) => (
               <option key={pet._id} value={pet._id}>{pet.name}</option>
