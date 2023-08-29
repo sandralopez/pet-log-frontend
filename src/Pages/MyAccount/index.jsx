@@ -246,9 +246,9 @@ function MyAccount() {
   return (
       <HomeLayout>
         <div className="flex flex-col items-center mr-10 ml-10 h-auto pb-10 pt-3">
+          <p className="font-medium text-xl">Mi cuenta</p>
+          <p className="font-light text-medium mt-10 mb-10 text-center ml-10 mr-10">Revisa y edita la información de tu cuenta.</p>
           <div className="flex flex-col items-center w-80">
-            <p className="font-medium text-xl">Mi cuenta</p>
-            <p className="font-light text-medium mt-10 mb-10 text-center ml-10 mr-10">Revisa y edita la información de tu cuenta.</p>
             {
               alert.type && <Alert alert={alert} setAlert={setAlert} /> 
             }

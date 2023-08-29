@@ -36,21 +36,23 @@ function Contact() {
 
   return (
     <HomeLayout>
-      <div className="flex flex-col w-full items-center justify-center">
+      <div className="flex flex-col items-center mr-10 ml-10 h-auto pb-10 pt-3">
+        <p className="font-medium text-xl">Contacto</p>
+        <p className="font-light text-medium mt-10 mb-10 text-center ml-10 mr-10">Si quieres dejarnos algún comentario, observación o sugerencia puedes enviarlo a través de este formulario.</p>
         <div className="flex justify-center w-1/2">
           {
             alert.type && <Alert alert={alert} setAlert={setAlert} /> 
           }
         </div>
-        <div className="flex flex-col w-1/2 mt-5 justify-start">
-          <p>Si quieres dejarnos algún <span className="font-bold">comentario, observación o sugerencia</span>, puedes hacérnosla llegar a través de este formulario.</p>
-          <form className="mt-5 w-full" onSubmit={handleCommentSubmit}>
+        <div className="flex flex-col w-80 justify-start">
+          <form className="w-full" onSubmit={handleCommentSubmit}>
             <textarea 
               id="comment"
               name="comment"
               onChange={(event) => setComment(event.target.value)}
               value={comment}
               placeholder="Escribe aquí tu comentario"
+              rows="5"
               >
             </textarea>
             <button className="button button-full">Enviar</button>
