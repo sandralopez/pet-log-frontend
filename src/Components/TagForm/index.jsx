@@ -30,7 +30,9 @@ function TagForm({ onSubmit, initialValues }) {
             name="measureUnit"
             placeholder="Kg, ml, gr..." 
             value={formData.measureUnit}
-            onChange={handleChange} />
+            onChange={handleChange}
+            minLength="3"
+            maxLength="128" />
         </>
       )
     }
@@ -53,7 +55,9 @@ function TagForm({ onSubmit, initialValues }) {
             name="timeUnit"
             placeholder="Día, mes..."
             value={formData.timeUnit}
-            onChange={handleChange}  />
+            onChange={handleChange}
+            minLength="3"
+            maxLength="128"  />
         </>
       )
 
@@ -77,7 +81,7 @@ function TagForm({ onSubmit, initialValues }) {
   }
 
   return (
-    <form className="items-center w-80 mt-4">
+    <form className="items-center w-80 mt-4" onSubmit={handleTagSubmit}>
       <label 
         htmlFor="name" 
         className="label">
@@ -89,7 +93,10 @@ function TagForm({ onSubmit, initialValues }) {
         name="name"
         placeholder="Nombre" 
         onChange={handleChange}
-        value={formData.name} />
+        value={formData.name}
+        minLength="3"
+        maxLength="128" 
+        required />
       <label 
         htmlFor="datatype" 
         className="label">
@@ -99,7 +106,8 @@ function TagForm({ onSubmit, initialValues }) {
         id="datatype" 
         name="datatype" 
         value={formData.datatype} 
-        onChange={handleChange} >
+        onChange={handleChange}
+        required >
           <option value="0">Seleccione...</option>
           <option value="Numero">Número</option>
           <option value="Texto">Texto</option>
@@ -142,8 +150,7 @@ function TagForm({ onSubmit, initialValues }) {
       { renderUnitTime() }
 
       <button
-        type="button"
-        onClick={handleTagSubmit}
+        type="submit"
         className="button button-full">
         Guardar
       </button>

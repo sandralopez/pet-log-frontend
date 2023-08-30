@@ -36,7 +36,7 @@ function LogForm({ onSubmit, initialValues }) {
   }
 
   return (
-    <form className="items-center w-80">
+    <form className="items-center w-80" onSubmit={handleLogSubmit}>
       <div className="flex flex-row space-x-4 my-5 flex-wrap justify-between">
         {
             tags?.map((tag) => (
@@ -70,7 +70,10 @@ function LogForm({ onSubmit, initialValues }) {
         name="value"
         placeholder="Valor" 
         onChange={handleChange}
-        value={formData.value} />
+        value={formData.value}
+        minLength="3"
+        maxLength="128" 
+        required />
       <label 
         htmlFor="date" 
         className="label">
@@ -82,7 +85,10 @@ function LogForm({ onSubmit, initialValues }) {
         name="date"
         placeholder="Fecha" 
         onChange={handleChange}
-        value={formData.date} />
+        value={formData.date}
+        min="2010-01-01"
+        max="2050-01-01"
+        required />
       <label 
         htmlFor="detail" 
         className="label">
@@ -93,10 +99,12 @@ function LogForm({ onSubmit, initialValues }) {
         id="detail" 
         name="detail"
         onChange={handleChange}
-        value={formData.detail} />
+        value={formData.detail}
+        minLength="3"
+        maxLength="1000"
+        required />
       <button
-        type="button"
-        onClick={handleLogSubmit}
+        type="submit"
         className="button button-full">
         Guardar
       </button>

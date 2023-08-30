@@ -50,7 +50,10 @@ function ReminderForm({ onSubmit, initialValues }) {
         name="subject"
         placeholder="Asunto" 
         value={formData.subject}
-        onChange={handleChange} />
+        onChange={handleChange}
+        minLength="3"
+        maxLength="128" 
+        required />
       <label 
         htmlFor="date" 
         className="label">
@@ -62,7 +65,10 @@ function ReminderForm({ onSubmit, initialValues }) {
         name="date"
         placeholder="Fecha" 
         value={formData.date}
-        onChange={handleChange} />
+        onChange={handleChange}
+        min="2010-01-01"
+        max="2050-01-01"
+        required />
       <label 
         htmlFor="detail" 
         className="label">
@@ -73,7 +79,10 @@ function ReminderForm({ onSubmit, initialValues }) {
         name="detail"
         placeholder="Detalle" 
         value={formData.detail}
-        onChange={handleChange} />
+        onChange={handleChange}
+        minLength="3"
+        maxLength="512" 
+        required />
       <button
         type="submit"
         className="button button-full">

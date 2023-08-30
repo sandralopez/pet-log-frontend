@@ -53,6 +53,9 @@ function Contact() {
               value={comment}
               placeholder="Escribe aquí tu comentario"
               rows="5"
+              minLength="3"
+              maxLength="512"
+              required
               >
             </textarea>
             <button className="button button-full">Enviar</button>
