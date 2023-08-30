@@ -53,6 +53,7 @@ export const updateReminder = async (reminderId, reminderData) => {
 export const deleteReminder = async (petId, reminderId) => {
     try {
         const { data } = await axiosPrivate.delete(`${baseUrl}/pets/${petId}/reminders/${reminderId}`);
+        
         return { status: 'ok', data: data };
     }
     catch(error) {

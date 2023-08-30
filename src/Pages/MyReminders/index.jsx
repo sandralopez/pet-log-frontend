@@ -49,7 +49,10 @@ function MyReminders() {
 
   const handleEdit = (reminder) => {
     setIsEditMode(true);
-    setSelectedItem(reminder);
+    setSelectedItem({
+    ...reminder,
+    date: new Date(reminder.date).toISOString().split('T')[0]
+    });
   }
 
   const handleCreate = () => {
@@ -66,7 +69,21 @@ function MyReminders() {
           throw Error('Ha ocurrido un error al crear el recordatorio');
         } 
         else {
-          setReminders(prevReminders => [...prevReminders, response.data]);
+          const currentDate = new Date();
+          const reminderDate = new Date(response.data.date);
+
+          if (reminderDate > currentDate) {
+            setReminders((prevReminders) => ({
+              ...prevReminders,
+              current: [...prevReminders.current, response.data]
+            }));
+          }
+          else {
+            setReminders((prevReminders) => ({
+              ...prevReminders,
+              past: [...prevReminders.past, response.data]
+            }));
+          }
 
           setAlert(() => ({
             type: "success",
@@ -85,7 +102,7 @@ function MyReminders() {
       }
     } else if (isEditMode) {
       try {
-        const { _id, created_at, ...updatedReminder } = formData;
+        const { _id, created_at, petName, ...updatedReminder } = formData;
 
         const response = await updateReminder(_id, updatedReminder);
 
@@ -93,11 +110,18 @@ function MyReminders() {
           throw Error('Ha ocurrido un error al modificar la información del recordatorio');
         } 
         else {
-          setReminders(prevReminders => {
-            return prevReminders.map(reminder =>
-              reminder._id === _id ? { ...reminder, ...response.data } : reminder
-            );
-          });
+          const currentDate = new Date();
+          const reminderDate = new Date(response.data.date);
+
+          const newRemindersState = { ...reminders };
+
+          const targetArray = reminderDate > currentDate ? 'current' : 'past'; 
+          
+          newRemindersState[targetArray] = newRemindersState[targetArray].map(reminder => 
+            reminder._id === _id ? { ...reminder, ...response.data } : reminder
+          )
+
+          setReminders(newRemindersState);
 
           setAlert(() => ({
             type: "success",
@@ -117,18 +141,32 @@ function MyReminders() {
     }
   };
 
-  /* const handleConfirmDelete = (reminder) => {
+  const handleConfirmDelete = (reminder) => {
     const handleDelete = async () => {
       try {
-        const { _id } = reminder;
+        const { petId, _id } = reminder;
 
-        const response = await deleteReminder(_id);
+        const response = await deleteReminder(petId, _id);
 
         if (response.status === 'error') {
           throw Error('Ha ocurrido un error al eliminar el recordatorio');
         } 
         else {
-          setReminders(reminders.filter(reminder => reminder._id !== response.data._id));
+          const currentDate = new Date();
+          const reminderDate = new Date(reminder.date);
+
+          if (reminderDate > currentDate) {
+            setReminders((prevReminders) => ({
+              ...prevReminders,
+              current: prevReminders.current.filter((reminder) => reminder._id !== response.data._id)
+            }));
+          }
+          else {
+            setReminders((prevReminders) => ({
+              ...prevReminders,
+              past: prevReminders.past.filter((reminder) => reminder._id !== response.data._id)
+            }));
+          }
 
           setAlert(() => ({
             type: "success",
@@ -151,7 +189,7 @@ function MyReminders() {
     setDeleteHandler(() => handleDelete);
     setShowModal(true);
     setConfirmMessage(`¿Deseas eliminar el recordatorio ${reminder.subject}?`)
-  } */
+  }
 
   return (
     <HomeLayout>
@@ -187,9 +225,12 @@ function MyReminders() {
                     reminders?.[activeTab]?.map(reminder => (
                       <ReminderCard 
                         key={reminder._id}
+                        pet={reminder.petName}
                         date={reminder.date} 
                         subject={reminder.subject} 
-                        detail={reminder.detail} />
+                        detail={reminder.detail}
+                        onSelect={() => handleEdit(reminder)}
+                        onDelete={() => handleConfirmDelete(reminder)} />
                     ))
                   }
                 </div>
