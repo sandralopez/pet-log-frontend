@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '../../Components/ProtectedRoute';
+import { Navbar } from '../../Components/Navbar';
 import { PetContextProvider } from '../../Context/PetContext';
 import { TagContextProvider } from '../../Context/TagContext';
 import { ModalContextProvider } from '../../Context/ModalContext';
@@ -18,96 +19,99 @@ import { About } from '../About';
 
 function App() {
 	return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/sign-in" element={<SignIn />} />
-        <Route 
-          path="/my-account" 
-          element={
-              <ProtectedRoute>
-                <MyAccount />
-              </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/my-pets" 
-          element={
-            <PetContextProvider>
-              <ModalContextProvider>
+    <>
+      <Navbar />
+      <Routes>  
+        <Route path="/" element={<Landing />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
+          <Route 
+            path="/my-account" 
+            element={
                 <ProtectedRoute>
-                  <MyPets />
+                  <MyAccount />
                 </ProtectedRoute>
-              </ModalContextProvider>
-            </PetContextProvider>
-          } 
-        />
-        <Route 
-          path="/my-logs" 
-          element={
-            <PetContextProvider>
+            } 
+          />
+          <Route 
+            path="/my-pets" 
+            element={
+              <PetContextProvider>
+                <ModalContextProvider>
+                  <ProtectedRoute>
+                    <MyPets />
+                  </ProtectedRoute>
+                </ModalContextProvider>
+              </PetContextProvider>
+            } 
+          />
+          <Route 
+            path="/my-logs" 
+            element={
+              <PetContextProvider>
+                <TagContextProvider>
+                  <ProtectedRoute>
+                    <MyLogs />
+                  </ProtectedRoute>
+                </TagContextProvider>
+              </PetContextProvider>
+            } 
+          />
+          <Route 
+            path="/my-graphs" 
+            element={
+              <PetContextProvider>
+                <TagContextProvider>
+                  <ProtectedRoute>
+                    <MyGraphs />
+                  </ProtectedRoute>
+                </TagContextProvider>
+              </PetContextProvider>
+            } 
+          />
+          <Route 
+            path="/my-tags" 
+            element={
               <TagContextProvider>
-                <ProtectedRoute>
-                  <MyLogs />
-                </ProtectedRoute>
+                <ModalContextProvider>
+                  <ProtectedRoute>
+                    <MyTags />
+                  </ProtectedRoute>
+                </ModalContextProvider>
               </TagContextProvider>
-            </PetContextProvider>
-          } 
-        />
-        <Route 
-          path="/my-graphs" 
-          element={
-            <PetContextProvider>
-              <TagContextProvider>
-                <ProtectedRoute>
-                  <MyGraphs />
-                </ProtectedRoute>
-              </TagContextProvider>
-            </PetContextProvider>
-          } 
-        />
-        <Route 
-          path="/my-tags" 
-          element={
-            <TagContextProvider>
-              <ModalContextProvider>
-                <ProtectedRoute>
-                  <MyTags />
-                </ProtectedRoute>
-              </ModalContextProvider>
-            </TagContextProvider>
-          } 
-        />
-        <Route 
-          path="/my-reminders" 
-          element={
-            <PetContextProvider>
-              <ModalContextProvider>
-                <ProtectedRoute>
-                  <MyReminders />
-                </ProtectedRoute>
-              </ModalContextProvider>
-            </PetContextProvider>
-          } 
-        />
-        <Route 
-          path="/contact" 
-          element={
-            <ProtectedRoute>
-              <Contact />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/home" 
-          element={
+            } 
+          />
+          <Route 
+            path="/my-reminders" 
+            element={
+              <PetContextProvider>
+                <ModalContextProvider>
+                  <ProtectedRoute>
+                    <MyReminders />
+                  </ProtectedRoute>
+                </ModalContextProvider>
+              </PetContextProvider>
+            } 
+          />
+          <Route 
+            path="/contact" 
+            element={
               <ProtectedRoute>
-                <Home />
+                <Contact />
               </ProtectedRoute>
-          } 
-        />
-      <Route path="/about" element={<About />} />
-    </Routes>
+            } 
+          />
+          <Route 
+            path="/home" 
+            element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+            } 
+          />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </>
 	)
 }
 

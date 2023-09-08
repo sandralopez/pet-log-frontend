@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../CustomHooks/useAuth';
+import { Notification } from '../../Components/Notification';
 
 function Navbar () {
 	const { isLogged, logout } = useAuth();
@@ -21,6 +22,10 @@ function Navbar () {
 		    		?
 		    			<div className="ml-5 flex w-[30%] items-center justify-end">
 							<ul	className="list-style-none flex flex-col pl-0 lg:mt-1 lg:flex-row">
+								<li>
+									
+									<Notification />
+								</li>
 								<li className="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1">
 									<Link
 										to="/home"

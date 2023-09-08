@@ -5,7 +5,6 @@ import { Footer } from '../Footer';
 function Layout({ children }) { 
 	return (
 		<>
-			<Navbar />
 			<div className="min-h-screen min-h-[calc(100vh-336px)]">
 				{ children }
 			</div>
