@@ -14,15 +14,22 @@ const Notification = () => {
           const response = await getNotifications();
 
           if (response.status === "ok") {
-            setNotifications([...response.data.threeDays, ...response.data.oneWeek]);
+            setNotifications([
+                ...response.data.threeDays.map((notification) => ({ ...notification, isInThreeDays: true, isInOneWeek: false })),
+                ...response.data.oneWeek.map((notification) => ({ ...notification, isInThreeDays: false, isInOneWeek: true }))
+            ]);
 
-            if (response.data.threeDays.length > 0) {
-                setIsInThreeDays(true);
-            }
+            response.data.threeDays.map((notification) => {
+                if (!notification.threeDaysNotified) {
+                    setIsInThreeDays(true);
+                }
+            });
 
-            if (response.data.oneWeek.length > 0) {
-                setIsInOneWeek(true);
-            }
+            response.data.oneWeek.map((notification) => {
+                if (!notification.oneWeekNotified) {
+                    setIsInOneWeek(true);
+                }
+            });
           }
           else {
             throw Error('Ha ocurrido un error al obtener las notificaciones');
@@ -52,7 +59,16 @@ const Notification = () => {
                     {
                         notifications?.map((notification) => (
                             <li key={notification._id} className="p-2 flex flex-col text-sm">
-                                <span className="font-bold">Recordatorio</span>
+                                <div className="flex flex-row items-center">
+                                    <div className={`rounded-full h-4 w-4 mr-2
+                                                                ${notification.isInOneWeek && !notification.oneWeekNotified
+                                                                    ? "bg-amber-500 dark: bg-amber-300"
+                                                                    : notification.isInThreeDays && !notification.threeDaysNotified
+                                                                            ? "bg-red-500 dark: bg-red-300"
+                                                                            : "hidden"} `}>                                            
+                                    </div>
+                                    <span className="font-bold">Recordatorio</span>
+                                </div>
                                 <span className="font-medium">Mascota:</span>
                                 <span className="font-light">{notification.petName}</span>
                                 <span className="font-medium">Asunto:</span>
