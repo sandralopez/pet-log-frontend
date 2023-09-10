@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BellIcon } from '@heroicons/react/24/solid';
-import { getNotifications } from '../../Services/user';
+import { getNotifications, updateNotifications } from '../../Services/user';
 
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
@@ -8,8 +8,7 @@ const Notification = () => {
     const [isInOneWeek, setIsInOneWeek] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
 
-    useEffect(() =>{
-      async function getNotificationsService() {
+    async function getNotificationsService() {
         try {
           const response = await getNotifications();
 
@@ -18,6 +17,9 @@ const Notification = () => {
                 ...response.data.threeDays.map((notification) => ({ ...notification, isInThreeDays: true, isInOneWeek: false })),
                 ...response.data.oneWeek.map((notification) => ({ ...notification, isInThreeDays: false, isInOneWeek: true }))
             ]);
+
+            setIsInThreeDays(false);
+            setIsInOneWeek(false);
 
             response.data.threeDays.map((notification) => {
                 if (!notification.threeDaysNotified) {
@@ -38,10 +40,35 @@ const Notification = () => {
         catch(error) {
             throw Error('Ha ocurrido un error al obtener las notificaciones');
         }
-      }
+    }
 
+    useEffect(() =>{
       getNotificationsService();
     }, []);
+
+    useEffect(() =>{
+        async function updateNotificationsService() {
+            try {
+                const response = await updateNotifications();
+
+                if (response.status === 'error') {
+                    throw Error('Ha ocurrido un error al actualizar las notificaciones');
+                } 
+            }
+            catch(error) {
+                throw Error('Ha ocurrido un error al actualizar las notificaciones');
+            }
+        }
+
+        if (isInOneWeek || isInThreeDays) {
+            if (showNotifications) {
+                updateNotificationsService();
+            }
+            else {
+                getNotificationsService();
+            }
+        }
+    }, [showNotifications]);
 
     return (
         <div>
@@ -67,7 +94,7 @@ const Notification = () => {
                                                                             ? "bg-red-500 dark: bg-red-300"
                                                                             : "hidden"} `}>                                            
                                     </div>
-                                    <span className="font-bold">Recordatorio</span>
+                                    <span className="font-bold">Recordatorio - {new Date(notification.date).toLocaleDateString()}</span>
                                 </div>
                                 <span className="font-medium">Mascota:</span>
                                 <span className="font-light">{notification.petName}</span>

@@ -56,3 +56,14 @@ export const getNotifications = async () => {
         return { status: 'error', data: error.response };
     }
 }
+
+export const updateNotifications = async () => {
+    try {
+        const { data } = await axiosPrivate.patch(`${baseUrl}/me/notifications`);
+        
+        return { status: 'ok', data: data };
+    }
+    catch(error) {
+        return { status: 'error', data: error.response };
+    }
+}
