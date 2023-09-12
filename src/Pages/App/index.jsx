@@ -14,6 +14,7 @@ import { Contact } from '../Contact';
 import { SignIn } from '../SignIn';
 import { MyPets } from '../MyPets';
 import { SignUp } from '../SignUp';
+import { Help } from '../Help';
 import { Home } from '../Home';
 import { About } from '../About';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/help" element={<Help />} />
           <Route 
             path="/my-account" 
             element={
