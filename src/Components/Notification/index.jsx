@@ -81,7 +81,7 @@ const Notification = () => {
                                                 ? "text-amber-500 dark: text-amber-300" 
                                                 : "text-gray-900 dark:text-slate-300"} `} />
             {
-                showNotifications && 
+                showNotifications && notifications.length > 0 &&
                 <ul className="absolute w-60 rounded-xl shadow-lg dark:shadow-slate-600 dark:bg-slate-600 p-2 mr-6 mt-8 divide-y dark: divide-slate-400">
                     {
                         notifications?.map((notification) => (
@@ -103,6 +103,15 @@ const Notification = () => {
                             </li>
                         ))
                     }
+                </ul>
+            }
+
+            {
+                showNotifications && notifications.length === 0 &&
+                <ul className="absolute w-60 rounded-xl shadow-lg dark:shadow-slate-600 dark:bg-slate-600 p-2 mr-6 mt-8 divide-y dark: divide-slate-400">
+                    <li className="p-2 flex flex-col text-sm">
+                        <span className="font-medium">No hay notificaciones para mostrar</span>
+                    </li>
                 </ul>
             }
         </div>
