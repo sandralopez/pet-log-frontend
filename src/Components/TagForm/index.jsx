@@ -31,8 +31,9 @@ function TagForm({ onSubmit, initialValues }) {
             placeholder="Kg, ml, gr..." 
             value={formData.measureUnit}
             onChange={handleChange}
-            minLength="3"
-            maxLength="128" />
+            minLength="1"
+            maxLength="128"
+            required />
         </>
       )
     }
@@ -57,7 +58,8 @@ function TagForm({ onSubmit, initialValues }) {
             value={formData.timeUnit}
             onChange={handleChange}
             minLength="3"
-            maxLength="128"  />
+            maxLength="128"
+            required  />
         </>
       )
 

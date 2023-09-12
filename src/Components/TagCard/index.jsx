@@ -21,7 +21,7 @@ function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 	                Unidad de medida
 	            </label>
 				<p id="unitMeasure" className="text-sm mb-2">
-					{measureUnit}
+					{measureUnit != '' ? measureUnit : 'Sin unidad de medida'}
 				</p>
 	            <label 
 	              htmlFor="unitTime" 
@@ -29,7 +29,7 @@ function TagCard({ tag, datatype, measureUnit, timeUnit, onDelete}) {
 	                Unidad de tiempo
 	            </label>
 				<p id="unitTime" className="text-sm mb-2">
-					{timeUnit}
+					{timeUnit != '' ? timeUnit : 'Sin unidad de tiempo'}
 				</p>
 				
 				<TrashIcon className="h-5 w-5 cursor-pointer" onClick={onDelete} />
