@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../CustomHooks/useAuth';
 import { Notification } from '../../Components/Notification';
+import { ColorMode } from '../../Components/ColorMode';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid';
 
 function Navbar () {
@@ -32,6 +33,9 @@ function Navbar () {
 								<li>
 									<Notification />
 								</li>
+								<li>
+									<ColorMode />
+								</li>
 								<li className="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1">
 									<Link
 										to="/home"
@@ -59,6 +63,9 @@ function Navbar () {
 						            	<QuestionMarkCircleIcon 
 							                className="h-6 w-6 mr-2 cursor-pointer text-gray-900 dark:text-slate-300" />
 							        </Link>
+								</li>
+								<li>
+									<ColorMode />
 								</li>
 								<li className="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1">
 									<Link
