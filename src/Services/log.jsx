@@ -2,13 +2,19 @@ import axiosPrivate from './AxiosConfig/axiosPrivate';
 
 const baseUrl = '/users/me/pets';
 
-export const getLogs = async (petId, pagination = null) => {
+export const getLogs = async (petId, filters = null, pagination = null) => {
     try {
         const params = {};
 
         if (pagination) {
             params.page = pagination.currentPage,
             params.size = pagination.size
+        }
+
+        if (filters) {
+            params.tag = filters.tag,
+            params.minDate = filters.minDate,
+            params.maxDate = filters.maxDate
         }
 
         const { data } = await axiosPrivate.get(`${baseUrl}/${petId}/logs`, { params });

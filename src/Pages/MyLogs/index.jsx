@@ -12,17 +12,17 @@ function MyLogs() {
   const [pets, setPets] = useContext(PetContext);  
   const [tags, setTags] = useContext(TagContext);
   const [selectedPet, setSelectedPet] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
   const [logs, setLogs] = useState([]);
   const [alert, setAlert] = useState({type: "", message:""});
   const [isEditMode, setIsEditMode] = useState(null);
   const [pagination, setPagination] = useState({ currentPage: 1, size: 10 });
   const [pageCount, setPageCount] = useState(null);
+  const [filters, setFilters] = useState({ tag: "", minDate: "", maxDate: ""})
 
   const columns = [
     {
       header: 'Fecha',
-      accessor: (row) => new Date(row.date).toLocaleDateString()
+      accessor: (row) => new Date(row.date).toLocaleDateString('es-ES', { timeZone : 'UTC' })
     },
     {
       header: 'Etiqueta',
@@ -47,14 +47,14 @@ function MyLogs() {
   }, [pets]);
 
   useEffect(() => {
-    if (selectedPet !== "" || selectedTag !== "") {
-      getLogsService(selectedPet, selectedTag);
+    if (selectedPet !== "" || filters.tag !== "") {
+      getLogsService();
     }
-  }, [selectedPet, selectedTag, pagination]);
+  }, [selectedPet, filters, pagination]);
 
-  async function getLogsService(pet, tag) {
+  async function getLogsService() {
     try {
-      const response = tag ? await getLogsByTag(pet, tag, pagination) : await getLogs(pet, pagination);
+      const response = await getLogs(selectedPet, filters, pagination);
 
       if (response.status === "ok") {
         setPageCount(response.data.pageCount);
@@ -179,12 +179,11 @@ function MyLogs() {
     }))
   }
 
-  const handleTagChange = (event) => {
-    setSelectedTag(event.target.value);
-    setPagination((prevData) => ({
+  const handleFiltersChange = (event) => {
+    setFilters(prevData => ({
       ...prevData,
-      currentPage: 1
-    }))
+      [event.target.getAttribute("data-filter")]: event.target.value,
+    }));
   }
 
   return (
@@ -209,24 +208,32 @@ function MyLogs() {
                   className="button">
                   Añadir nuevo
                 </button>
+                <div className="my-5 sm:columns-1 md:columns-2">
+                  <div className="w-full flex flex-col">
+                    <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
+                    <select id="pet" value={selectedPet} onChange={handlePetChange} className="w-80 my-4 border border-black p-3 rounded-xl">
+                      {
+                        pets?.map((pet) => (
+                            <option key={pet._id} value={pet._id}>{pet.name}</option>
+                        ))
+                      }
+                    </select>
+                    <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
+                    <select id="tag" data-filter="tag" value={filters.tag._id} onChange={handleFiltersChange} className="w-80 my-4 border border-black p-3 rounded-xl">
+                      <option value="">Ver todos</option>
+                      {
+                        tags?.map((tag) => (
+                            <option key={tag._id} value={tag._id}>{tag.name}</option>
+                        ))
+                      }
+                    </select>
+                    <label htmlFor="min-date" className="label">Selecciona la fecha mínima: </label>
+                    <input id="min-date" type="date" data-filter="minDate" value={filters.minDate} onChange={handleFiltersChange} className="w-80 my-4 border border-black p-3 rounded-xl" />
+                    <label htmlFor="max-date" className="label">Selecciona la fecha ḿáxima: </label>
+                    <input id="max-date" type="date" data-filter="maxDate" value={filters.maxDate} onChange={handleFiltersChange} className="w-80 my-4 border border-black p-3 rounded-xl" />
+                  </div>
+                </div>
                 <div className="w-full flex flex-col my-5">
-                  <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
-                  <select id="pet" value={selectedPet} onChange={handlePetChange} className="w-80 my-4 border border-black p-3 rounded-xl">
-                    {
-                      pets?.map((pet) => (
-                          <option key={pet._id} value={pet._id}>{pet.name}</option>
-                      ))
-                    }
-                  </select>
-                  <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
-                  <select id="tag" value={selectedTag._id} onChange={handleTagChange} className="w-80 my-4 border border-black p-3 rounded-xl">
-                    <option value="">Ver todos</option>
-                    {
-                      tags?.map((tag) => (
-                          <option key={tag._id} value={tag._id}>{tag.name}</option>
-                      ))
-                    }
-                  </select>
                   { 
                     logs.length === 0 ? (
                       <span className="font-medium font-xl text-medium">No hay registros asociados a esta mascota</span>
