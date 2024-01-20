@@ -10,17 +10,19 @@ function About() {
               Ella es Tsuki
             </p>
         </div>
-        <div className="flex-row w-1/2 h-full bg-gray-300 dark:bg-slate-700">
-
+      <div className="flex-row w-1/2 h-full bg-gray-300 dark:bg-slate-700">
+        <div className="flex w-full h-full justify-center items-center">
+          <img src="/tsuki.png" alt="Imagen de una gatita" className="h-52 w-52" />
         </div>
+      </div>
       </div>
       <div className="flex flex-col w-full items-center justify-center">
         <div className="flex flex-col w-1/2 justify-start">
           <p><span className="font-bold">Tsuki</span> es la gatita que inspiró la creación de este sistema.</p>
-          <p>Ella tiene enfermedad renal crónica después de haber perdido la funcionalidad de uno de sus riñones debido a una hidronefrosis.</p>
-          <p><span className="font-bold">Es una gatita muy amada.</span> En nuestro empeño por controlar de mejor forma su enfermedad, tratamos de llevar un registro de parámetros de su salud como la toma de agua o de comida.</p>
-          <p>Este sistema surge como una solución a nuestra necesidad de sistematizar los registros de forma que podamos guardarlos cómodamente, revisarlos y analizarlos para llevar un mejor control de su salud.</p>
-          <p className="mt-5">Esperamos que este sistema sea de utilidad a todos aquellos que, por el motivo que sea, desean llevar un registro de distintos parámetros de salud de sus amados animales.</p>
+          <p>Ella tuvo enfermedad renal crónica después de haber perdido la funcionalidad de uno de sus riñones debido a una hidronefrosis.</p>
+          <p><span className="font-bold">Fue una gatita muy amada.</span> En nuestro empeño por controlar de mejor forma su enfermedad, tratamos de llevar un registro de parámetros de su salud como la toma de agua o de comida.</p>
+          <p>Este sistema surgió como una solución a nuestra necesidad de sistematizar los registros de forma que pudiéramos guardarlos cómodamente, revisarlos y analizarlos para llevar un mejor control de su salud.</p>
+          <p className="mt-5">Esperamos que este sistema sea de utilidad a todos aquellos que, por el motivo que sea, tienen la misma necesidad que dio origen a este sistema.</p>
         </div>
       </div>
     </Layout>
