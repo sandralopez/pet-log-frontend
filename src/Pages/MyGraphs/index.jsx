@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { getLogsByTag } from '../../Services/log';
+import { getLogs } from '../../Services/log';
 import { PetContext } from '../../Context/PetContext';
 import { TagContext } from '../../Context/TagContext';
 import { ChartBars } from '../../Components/ChartBars';
@@ -12,6 +12,7 @@ function MyGraphs() {
   const [tags, setTags] = useContext(TagContext);  
   const [selectedPet, setSelectedPet] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
+  const [filters, setFilters] = useState({ tag: "", minDate: "", maxDate: ""})
   const [alert, setAlert] = useState({type: "", message:""});
   const [data, setData] = useState([]);
 
@@ -20,25 +21,39 @@ function MyGraphs() {
       setSelectedPet(pets[0]._id);
     } else {
       setSelectedPet("");
-      setData([]);
     }
   }, [pets]);
 
   useEffect(() => {
     if (tags.length > 0) {
       setSelectedTag(tags[0]);
+
+      setFilters(prevData => ({
+        ...prevData,
+        tag: tags[0]._id,
+      }));
     } else {
       setSelectedTag({});
-      setData([]);;
+
+      setFilters(prevData => ({
+        ...prevData,
+        tag: "",
+      }));
     }
   }, [tags]);
 
   useEffect(() => {
-    if (selectedPet !== "" && selectedTag !== "") {
-      setData([]);
-      getLogsByTagService(selectedPet, selectedTag._id);
+    if (selectedPet !== "" && selectedTag.tag !== "") {
+      getLogsService();
     }
-  }, [selectedPet, selectedTag]);
+  }, [selectedPet, selectedTag, filters]);
+
+  const handleFiltersChange = (event) => {
+    setFilters(prevData => ({
+      ...prevData,
+      [event.target.getAttribute("data-filter")]: event.target.value,
+    }));
+  }
 
   const handleSelectTag = (event) => {
     const tagId = event.target.value;
@@ -47,18 +62,25 @@ function MyGraphs() {
       if (tag._id === tagId) {
         setSelectedTag(tag);
       }
-    })
+    });
+
+    setFilters(prevData => ({
+      ...prevData,
+      tag: tagId
+    }));
   };
 
-  async function getLogsByTagService(pet, tag) {
+  async function getLogsService() {
     try {
-      const response = await getLogsByTag(pet, tag);
+      const response = await getLogs(selectedPet, filters);
 
       if (response.status === "ok") {
+        setData([]);
+        
         response.data.rows.map(log => {
           setData(prevData => ([
             ...prevData, 
-            { name: new Date(log.date).toLocaleDateString(), value: log.value }
+            { name: new Date(log.date).toLocaleDateString('es-ES', { timeZone: 'UTC' }), value: log.value }
           ]));
         });
       }
@@ -82,8 +104,8 @@ function MyGraphs() {
           {
             alert.type && <Alert alert={alert} setAlert={setAlert} /> 
           }
-        <div className="w-full my-5">
-          <div className="flex flex-col w-1/2">
+        <div className="my-5 sm:columns-1 md:columns-2">
+          <div className="w-full flex flex-col">
             <label htmlFor="pet" className="label">Selecciona una de tus mascotas: </label>
             <select id="pet" value={selectedPet} onChange={event => setSelectedPet(event.target.value)} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
@@ -93,14 +115,20 @@ function MyGraphs() {
               }
             </select>
             <label htmlFor="tag" className="label">Selecciona el ítem que quieres visualizar: </label>
-            <select id="tag" value={selectedTag._id} onChange={handleSelectTag} className="w-80 my-4 border border-black p-3 rounded-xl">
+            <select id="tag" data-filter="tag" value={selectedTag._id} onChange={handleSelectTag} className="w-80 my-4 border border-black p-3 rounded-xl">
               {
                 tags?.map((tag) => (
                     <option key={tag._id} value={tag._id}>{tag.name}</option>
                 ))
               }
             </select>
+            <label htmlFor="min-date" className="label">Selecciona la fecha mínima: </label>
+            <input id="min-date" type="date" data-filter="minDate" value={filters.minDate} onChange={handleFiltersChange} className="w-80 my-4 border border-black p-3 rounded-xl" />
+            <label htmlFor="max-date" className="label">Selecciona la fecha ḿáxima: </label>
+            <input id="max-date" type="date" data-filter="maxDate" value={filters.maxDate} onChange={handleFiltersChange} className="w-80 my-4 border border-black p-3 rounded-xl" />
           </div>
+        </div>
+        <div className="w-full flex flex-col my-5">
           <div className="flex flex-col w-11/12 h-80 mt-4">
             {
               data.length == 0 && <span className="font-medium font-xl">No hay registros para la selección</span> 
